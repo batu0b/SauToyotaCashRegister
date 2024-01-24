@@ -1,0 +1,20 @@
+[
+  {
+    "userCode": 2,
+    "name": "Ahsen",
+    "surname": "Topaloğlu",
+    "password": "test1234",
+    "cashRegisterNumber": 2,
+    "storeNumber": 1,
+    "token": "sCRGEeLIEUOibzoPhO59BBppkma5a8RgA4HfXziCLcolirXJGBEtVV850FpW6DCy"
+  },
+  {
+    "userCode": 1,
+    "name": "Hikmet",
+    "surname": "Toner",
+    "password": "test1234",
+    "cashRegisterNumber": 2,
+    "storeNumber": 1,
+    "token": "7WTXXFAB79B3X3X9PUL5175TO56EAFI6EDRCU9AJSLMDYIF7VPQLKUA43757PR4K"
+  }
+]
