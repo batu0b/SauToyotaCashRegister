@@ -1,0 +1,17 @@
+{
+  "translation": {
+    "UserName": "Kullanici Kodu",
+    "Password": "Şifre",
+    "Login": "Giriş Yap",
+    "Welcome": "Hoşgeldiniz",
+    "StoreIsOnline": "Mağza Çevrimiçi",
+    "StoreIsOffline": "Mağza Çevrimdışı",
+    "Products": "Ürünler",
+    "Campaigns": "Kampanyalar",
+    "Sale": "Satış",
+    "Settings": "Ayarlar",
+    "cashRegisterNumber": "Kasa Numarası",
+    "storeNumber": "Mağza Numarası",
+    "ipNo": "Kasa İp Numarası"
+  }
+}

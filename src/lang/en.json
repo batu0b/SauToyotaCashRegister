@@ -1,0 +1,17 @@
+{
+  "translation": {
+    "UserName": "User Code",
+    "Password": "Password",
+    "Login": "Login",
+    "Welcome": "Welcome",
+    "StoreIsOnline": "Store Is Online",
+    "StoreIsOffline": "Store Is Offline",
+    "Products": "Products",
+    "Campaigns": "Campaigns",
+    "Sale": "Sale",
+    "Settings": "Settings",
+    "cashRegisterNumber": "Cash Register Number",
+    "storeNumber": "Store Number",
+    "ipNo": "Cash Register Ip No"
+  }
+}
