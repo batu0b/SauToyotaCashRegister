@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthcontext } from "../context/auth/AuthContext";
 
-export const HomeLayout = () => {
+export const MainLayout = () => {
   //TODO loader ekle
   const { isAuth } = useAuthcontext();
   if (isAuth === null) {
