@@ -17,6 +17,9 @@ i18n
         ...tr,
       },
     },
+    detection: {
+      convertDetectedLanguage: (lng) => lng.split("-")[0],
+    },
   });
 
 export default i18n;
