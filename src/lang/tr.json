@@ -12,6 +12,10 @@
     "Settings": "Ayarlar",
     "cashRegisterNumber": "Kasa Numarası",
     "storeNumber": "Mağza Numarası",
-    "ipNo": "Kasa İp Numarası"
+    "ipNo": "Kasa İp Numarası",
+    "passworNotFill": "Lütfen Şifre Alanını Doldurun",
+    "userCodeNotFill": "Lütfen Kullanıcı Kodu Alanını Doldurun",
+    "user code or password is incorrect": "Kullanıcı Kodu Veya Şifre Yanlış",
+    "slctLng": "Kullanmak İstediğiniz Dili Seçin"
   }
 }

@@ -3,7 +3,7 @@ import user from "./dummy_users.json";
 const url = import.meta.env.VITE_APP_API_URL;
 
 export const handlers = [
-  http.post(`${url}/post`, async ({ request }) => {
+  http.post(`${url}/login`, async ({ request }) => {
     const reqBody = await request.json();
     const res = user.find((x) => {
       return (

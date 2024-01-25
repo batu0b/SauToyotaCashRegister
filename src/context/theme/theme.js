@@ -1,3 +1,4 @@
+import { createTheme } from "@mui/material";
 
 export const getDesignTokens = (mode) => ({
   palette: {
@@ -13,6 +14,9 @@ export const getDesignTokens = (mode) => ({
           },
           error: {
             main: "#f44336",
+          },
+          background: {
+            default: "#eeeeee",
           },
         }
       : {
@@ -43,7 +47,33 @@ export const getDesignTokens = (mode) => ({
         "#root": {
           minHeight: "100vh",
         },
+        "input[type=number]": props.unstable_sx({ MozAppearance: "textfield" }),
+        "input::-webkit-outer-spin-button, input::-webkit-inner-spin-button":
+          props.unstable_sx({
+            WebkitAppearance: "none",
+            margin: 0,
+          }),
+        ".modal_box": props.unstable_sx({
+          position: "absolute",
+          minHeight: "30vh",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          minwidth: 400,
+          bgcolor: "primary.main",
+          border: `2px solid "#111"`,
+          boxShadow: 24,
+          p: 4,
+          borderRadius: 2,
+          color: "#eee",
+        }),
       }),
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: "contained",
+        color: "secondary",
+      },
     },
   },
   shape: {

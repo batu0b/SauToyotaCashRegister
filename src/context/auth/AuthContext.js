@@ -4,10 +4,10 @@ import { createContext } from "react";
 export const AuthContext = createContext({
   isAuth: false,
   setIsAuth: () => {},
-  isLoading: true,
+  isLoading: false,
   setIsLoading: () => {},
   user: null,
   setUser: () => {},
 });
 
-export const useAuthcontext = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);

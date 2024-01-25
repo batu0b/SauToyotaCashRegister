@@ -7,6 +7,7 @@ import { ThemeContextProvider } from "./context/theme/ThemeContext.jsx";
 import axios from "axios";
 import { ServerStatusContexProvider } from "./context/server_status/ServerStatusContexProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./context/auth/AuthContextProvider.jsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 worker.start().then(() =>
@@ -14,9 +15,11 @@ worker.start().then(() =>
     <React.StrictMode>
       <BrowserRouter>
         <ThemeContextProvider>
-          <ServerStatusContexProvider>
-            <App />
-          </ServerStatusContexProvider>
+          <AuthContextProvider>
+            <ServerStatusContexProvider>
+              <App />
+            </ServerStatusContexProvider>
+          </AuthContextProvider>
         </ThemeContextProvider>
       </BrowserRouter>
     </React.StrictMode>

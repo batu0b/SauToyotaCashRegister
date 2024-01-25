@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { worker } from "../mocks/browser";
+import { useEffect, useState } from "react";
 
 export const useAxios = ({
   url,
@@ -22,7 +21,6 @@ export const useAxios = ({
       setResponse(res);
       setError(null);
     } catch (error) {
-      console.log(error.response);
       setError(error.response ? error.response.data : error.message);
     } finally {
       setIsLoading(false);

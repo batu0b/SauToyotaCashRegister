@@ -12,6 +12,10 @@
     "Settings": "Settings",
     "cashRegisterNumber": "Cash Register Number",
     "storeNumber": "Store Number",
-    "ipNo": "Cash Register Ip No"
+    "ipNo": "Cash Register Ip No",
+    "passworNotFill": "Please Fill In The Password Field",
+    "userCodeNotFill": "Please Fill In The User Code Field",
+    "user code or password is incorrect": "User Code Or Password Is Incorrect",
+    "slctLng": "Select the Language You Want to Use"
   }
 }

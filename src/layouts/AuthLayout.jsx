@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuthcontext } from "../context/auth/AuthContext";
+import { useAuthContext } from "../context/auth/AuthContext";
+import { FullPageLoader } from "../components/FullPageLoader";
 
 export const AuthLayout = () => {
-  //TODO loader ekle
-  const { isAuth } = useAuthcontext();
+  const { isAuth } = useAuthContext();
   if (isAuth === null) {
-    return <h1>...</h1>;
+    return <FullPageLoader />;
   }
   return isAuth ? <Navigate to={"/"} /> : <Outlet />;
 };
