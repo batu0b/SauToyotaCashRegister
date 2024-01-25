@@ -1,4 +1,3 @@
-import { amber, deepOrange, grey } from "@mui/material/colors";
 
 export const getDesignTokens = (mode) => ({
   palette: {
@@ -6,25 +5,48 @@ export const getDesignTokens = (mode) => ({
     ...(mode === "light"
       ? {
           // palette values for light mode
-          primary: amber,
-          divider: amber[200],
-          text: {
-            primary: grey[900],
-            secondary: grey[800],
+          primary: {
+            main: "#37474f",
+          },
+          secondary: {
+            main: "#f50057",
+          },
+          error: {
+            main: "#f44336",
           },
         }
       : {
-          // palette values for dark mode
-          primary: deepOrange,
-          divider: deepOrange[700],
-          background: {
-            default: deepOrange[900],
-            paper: deepOrange[900],
+          primary: {
+            main: "#ff5722",
           },
+          secondary: {
+            main: "#b2ff59",
+          },
+          error: {
+            main: "#f44336",
+          },
+          divider: "#757575",
           text: {
-            primary: "#fff",
-            secondary: grey[500],
+            hint: "#ede7f6",
+            disabled: "#777777",
+            secondary: "#f3e5f5",
           },
         }),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: (props) => ({
+        body: {
+          backgroundColor: props.palette.background,
+          minHeight: "100vh",
+        },
+        "#root": {
+          minHeight: "100vh",
+        },
+      }),
+    },
+  },
+  shape: {
+    borderRadius: 7,
   },
 });
