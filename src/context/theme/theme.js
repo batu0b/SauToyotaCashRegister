@@ -18,6 +18,7 @@ export const getDesignTokens = (mode) => ({
           background: {
             default: "#eeeeee",
           },
+          customSecondary: "#ffff",
         }
       : {
           primary: {
@@ -35,6 +36,7 @@ export const getDesignTokens = (mode) => ({
             disabled: "#777777",
             secondary: "#f3e5f5",
           },
+          customSecondary: "#272727",
         }),
   },
   components: {
@@ -87,7 +89,7 @@ export const getDesignTokens = (mode) => ({
         },
         "*::-webkit-scrollbar-thumb": {
           borderRadius: 5,
-          backgroundColor:  props.palette.secondary.dark,
+          backgroundColor: props.palette.secondary.dark,
         },
         "*::-webkit-scrollbar-thumb:hover": {
           backgroundColor: props.palette.secondary.main,
