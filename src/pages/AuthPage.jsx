@@ -14,7 +14,7 @@ import { useFormik } from "formik";
 import { LoginSchema } from "../validations";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
-//TODO 
+//TODO
 export default function AuthPage() {
   const { t } = useTranslation();
   const { setIsAuth, setIsLoading, setUser, isLoading } = useAuthContext();
@@ -123,8 +123,33 @@ export default function AuthPage() {
           </Typography>
         </Box>
       </Box>
-      <LanguageSwitcher bottom={80} />
-      <ThemeSwitcher bottom={24} />
+      <Box
+        sx={(theme) => ({
+          position: "absolute",
+          bottom: 0,
+          [theme.breakpoints.down("sm")]: {
+            position: "unset",
+            display: "flex",
+          },
+        })}
+      >
+        <LanguageSwitcher
+          sx={(theme) => ({
+            [theme.breakpoints.down("sm")]: {
+              position: "unset",
+            },
+          })}
+          bottom={80}
+        />
+        <ThemeSwitcher
+          sx={(theme) => ({
+            [theme.breakpoints.down("sm")]: {
+              position: "unset",
+            },
+          })}
+          bottom={24}
+        />
+      </Box>
     </Container>
   );
 }

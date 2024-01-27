@@ -5,6 +5,7 @@ import AuthPage from "../pages/AuthPage";
 import HomePage from "../pages/HomePage";
 import Settigns from "../pages/Settigns";
 import { ServerStatusLayout } from "../layouts/ServerStatusLayout";
+import StoreErrorPage from "../pages/StoreErrorPage";
 
 export const PageRouter = () => {
   return (
@@ -14,7 +15,7 @@ export const PageRouter = () => {
           <Route index path="/" element={<HomePage />} />
         </Route>
         <Route path="/settings" element={<Settigns />} />
-        <Route path="/StoreError" element={<h1>server error</h1>} />
+        <Route path="/StoreError" element={<StoreErrorPage />} />
       </Route>
       <Route element={<AuthLayout />}>
         <Route path="/auth" element={<AuthPage />} />
