@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import { LoginSchema } from "../validations";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
+//TODO 
 export default function AuthPage() {
   const { t } = useTranslation();
   const { setIsAuth, setIsLoading, setUser, isLoading } = useAuthContext();

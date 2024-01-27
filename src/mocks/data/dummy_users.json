@@ -6,6 +6,7 @@
     "password": "test1234",
     "cashRegisterNumber": 2,
     "storeNumber": 1,
+    "ipNo": "10.0.2.16",
     "token": "sCRGEeLIEUOibzoPhO59BBppkma5a8RgA4HfXziCLcolirXJGBEtVV850FpW6DCy"
   },
   {
@@ -15,6 +16,7 @@
     "password": "test1234",
     "cashRegisterNumber": 2,
     "storeNumber": 1,
+    "ipNo": "10.0.2.18",
     "token": "7WTXXFAB79B3X3X9PUL5175TO56EAFI6EDRCU9AJSLMDYIF7VPQLKUA43757PR4K"
   }
 ]

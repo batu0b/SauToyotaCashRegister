@@ -16,6 +16,24 @@
     "passworNotFill": "Please Fill In The Password Field",
     "userCodeNotFill": "Please Fill In The User Code Field",
     "user code or password is incorrect": "User Code Or Password Is Incorrect",
-    "slctLng": "Select the Language You Want to Use"
+    "slctLng": "Select the Language You Want to Use",
+    "Dashboard": "Dashboard",
+    "Basket": "Basket",
+    "Qr": "QR Scanning",
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun",
+    "My Sales in the Last 1 Week": "My Sales in the Last 1 Week",
+    "Best Sellers Of The Week": "Best Sellers Of The Week",
+    "Bread": "Bread",
+    "Pasta": "{{brand}} Pasta",
+    "Rice": "{{brand}} Rice",
+    "Olive Oil": "{{brand}} Olive Oil",
+    "Tomato Paste": "{{brand}} Tomato Paste",
+    "Average Number Of Customers Per Hour": "Average Number Of Customers Per Hour"
   }
 }
