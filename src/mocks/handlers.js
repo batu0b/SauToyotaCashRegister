@@ -3,6 +3,7 @@ import user from "./data/dummy_users.json";
 import charts from "./data/dummy_charts.json";
 
 const url = import.meta.env.VITE_APP_API_URL;
+let serverStatus = true;
 
 export const handlers = [
   http.post(`${url}/login`, async ({ request }) => {
@@ -24,15 +25,22 @@ export const handlers = [
   }),
 
   http.get(`${url}/status`, async ({ request }) => {
-    const isOk = true;
-    if (isOk) {
+    if (serverStatus) {
       return HttpResponse.json();
     }
     return HttpResponse.json({}, { status: 503 });
   }),
 
+  http.post(`${url}/status/set`, async ({ request }) => {
+    const req = await request.json();
+    serverStatus = req.set;
+    return HttpResponse.json(serverStatus);
+  }),
+
   http.get(`${url}/charts/:userCode`, async ({ params }) => {
-    const userCharts = charts.find((x) => x.userCode === parseInt(params.userCode));
+    const userCharts = charts.find(
+      (x) => x.userCode === parseInt(params.userCode)
+    );
     await delay(1200);
     if (!!userCharts) {
       const { userCode, ...res } = userCharts;

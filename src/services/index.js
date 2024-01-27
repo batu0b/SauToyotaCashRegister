@@ -23,3 +23,14 @@ export const loginService = async ({
     setIsLoading(false);
   }
 };
+
+export const storeConnectionPostService = async (isAlive, setServerStatus) => {
+  try {
+    const res = await axios.post("/status/set", {
+      set: !isAlive,
+    });
+    setServerStatus(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};

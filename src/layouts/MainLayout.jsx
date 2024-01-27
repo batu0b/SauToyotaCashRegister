@@ -13,7 +13,7 @@ export const MainLayout = () => {
     return <FullPageLoader />;
   }
   return isAuth ? (
-    <Box sx={{ display: matches ? null : "flex", overflow: "hidden" }}>
+    <Box sx={{ display: matches ? null : "flex",  }}>
       <AppDrawer matches={matches} />
       <Outlet />
     </Box>

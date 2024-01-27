@@ -33,7 +33,9 @@ export const ServerStatusContexProvider = ({ children }) => {
   }, []);
 
   return (
-    <ServerStatusContex.Provider value={{ serverIsAlive }}>
+    <ServerStatusContex.Provider
+      value={{ serverIsAlive, setServerStatus: setServerIsAlive }}
+    >
       {children}
     </ServerStatusContex.Provider>
   );
