@@ -89,7 +89,7 @@ export const AppDrawer = ({ matches }) => {
           handleDrawer={handleDrawer}
           serverIsAlive={serverIsAlive}
           location={
-            upperNav.concat(downNav).find((x) => x.pathname === pathname).name
+            upperNav.concat(downNav).find((x) => x.pathname === pathname)?.name
           }
           t={t}
         />
@@ -158,14 +158,6 @@ export const AppDrawer = ({ matches }) => {
         <Divider />
         <DrawerList list={downNav} currentPathname={pathname} translator={t} />
         <Divider />
-        <Box padding={2}>
-          <Button sx={{ marginTop: 2 }} fullWidth onClick={logOut}>
-            exit
-          </Button>
-          <Button sx={{ marginTop: 2 }} fullWidth onClick={toggleColorMode}>
-            change theme
-          </Button>
-        </Box>
       </Drawer>
     </>
   );

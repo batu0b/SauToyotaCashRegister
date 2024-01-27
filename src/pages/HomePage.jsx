@@ -1,11 +1,4 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Grid,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { ResponsiveLineChart } from "../components/chart/ResponsiveLineChart";
@@ -13,6 +6,7 @@ import { ResponsivePieChart } from "../components/chart/ResponsivePieChart";
 import { ChartGridItem } from "../components/chart/ChartGridItem";
 import { useAxios } from "../hooks/useAxios";
 import { CustomTooltipForBestSeller } from "../components/chart/CustomTooltipForBestSeller";
+import { ContainerDiv } from "../components/ContainerDiv";
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -24,20 +18,7 @@ export default function HomePage() {
   });
 
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        padding: 2,
-        minHeight: "100vh",
-        display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
-      <Toolbar />
+    <ContainerDiv sx={{ flexWrap: "wrap" }}>
       <Box
         sx={(theme) => ({
           position: "absolute",
@@ -119,6 +100,6 @@ export default function HomePage() {
           </Grid>
         </>
       )}
-    </Container>
+    </ContainerDiv>
   );
 }

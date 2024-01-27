@@ -9,6 +9,8 @@ export const LanguageSwitcher = ({
   left,
   bottom,
   top,
+  disableRipple = true,
+  sx,
 }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -16,15 +18,18 @@ export const LanguageSwitcher = ({
 
   return (
     <Box
-      sx={{
-        position: position,
-        top: top,
-        bottom: bottom,
-        right: rigt,
-        left: left,
-      }}
+      sx={[
+        {
+          position: position,
+          top: top,
+          bottom: bottom,
+          right: rigt,
+          left: left,
+        },
+        sx,
+      ]}
     >
-      <IconButton disableRipple onClick={handleOpen}>
+      <IconButton disableRipple={disableRipple} onClick={handleOpen}>
         <GTranslateIcon fontSize={"large"} />
       </IconButton>
       <LanguageModal open={open} handleClose={handleClose} />

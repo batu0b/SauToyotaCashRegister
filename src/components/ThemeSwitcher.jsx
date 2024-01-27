@@ -10,19 +10,24 @@ export const ThemeSwitcher = ({
   left,
   bottom,
   top,
+  sx,
+  disableRipple = true,
 }) => {
   const { mode, toggleColorMode } = useThemeContext();
   return (
     <Box
-      sx={{
-        position: position,
-        top: top,
-        bottom: bottom,
-        right: rigt,
-        left: left,
-      }}
+      sx={[
+        {
+          position: position,
+          top: top,
+          bottom: bottom,
+          right: rigt,
+          left: left,
+        },
+        sx,
+      ]}
     >
-      <IconButton disableRipple onClick={toggleColorMode}>
+      <IconButton disableRipple={disableRipple} onClick={toggleColorMode}>
         {mode === "dark" ? (
           <Brightness7Icon fontSize={"large"} />
         ) : (
