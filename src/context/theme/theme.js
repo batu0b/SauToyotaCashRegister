@@ -67,6 +67,34 @@ export const getDesignTokens = (mode) => ({
           borderRadius: 2,
           color: "#eee",
         }),
+        "*": {
+          scrollbarWidth: "thin",
+          scrollbarColor: props.palette.background.paper,
+        },
+        "*::-webkit-scrollbar": {
+          height: 12,
+          width: 12,
+        },
+        "*::-webkit-scrollbar-track": {
+          borderRadius: 5,
+          backgroundColor: props.palette.background.default,
+        },
+        "*::-webkit-scrollbar-track:hover": {
+          backgroundColor: props.palette.background.default,
+        },
+        "*::-webkit-scrollbar-track:active": {
+          backgroundColor: props.palette.background.default,
+        },
+        "*::-webkit-scrollbar-thumb": {
+          borderRadius: 5,
+          backgroundColor:  props.palette.secondary.dark,
+        },
+        "*::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: props.palette.secondary.main,
+        },
+        "*::-webkit-scrollbar-thumb:active": {
+          backgroundColor: props.palette.secondary.main,
+        },
       }),
     },
     MuiButton: {
@@ -78,5 +106,16 @@ export const getDesignTokens = (mode) => ({
   },
   shape: {
     borderRadius: 7,
+  },
+});
+
+const asd = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: (props) => ({
+        scrollbarWidth: "thin",
+        scrollbarColor: props.palette.secondary.light,
+      }),
+    },
   },
 });

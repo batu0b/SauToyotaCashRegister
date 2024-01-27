@@ -7,7 +7,6 @@ export const LanguageModal = ({ open, handleClose }) => {
     { name: "Türkçe", code: "tr" },
   ];
   const { t, i18n } = useTranslation();
-  console.log(i18n.language);
   return (
     <Modal open={open} onClose={handleClose}>
       <Box

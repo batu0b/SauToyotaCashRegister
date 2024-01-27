@@ -25,7 +25,7 @@ export const ServerStatusContexProvider = ({ children }) => {
     interval.current = setInterval(() => {
       console.log("connetcting");
       chekServer();
-    }, 1000 * 60 * 60);
+    }, 1000 * 60);
 
     return () => {
       clearInterval(interval);

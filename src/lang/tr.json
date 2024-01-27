@@ -16,6 +16,24 @@
     "passworNotFill": "Lütfen Şifre Alanını Doldurun",
     "userCodeNotFill": "Lütfen Kullanıcı Kodu Alanını Doldurun",
     "user code or password is incorrect": "Kullanıcı Kodu Veya Şifre Yanlış",
-    "slctLng": "Kullanmak İstediğiniz Dili Seçin"
+    "slctLng": "Kullanmak İstediğiniz Dili Seçin",
+    "Dashboard": "Gösterge Paneli",
+    "Basket": "Sepet",
+    "Qr": "QR Tarama",
+    "Mon": "Pzt",
+    "Tue": "Sal",
+    "Wed": "Çar",
+    "Thu": "Per",
+    "Fri": "Cum",
+    "Sat": "Cmt",
+    "Sun": "Paz",
+    "My Sales in the Last 1 Week": "Son 1 Haftadaki Satışlarım",
+    "Best Sellers Of The Week": "Haftanın En Çok Satanları",
+    "Bread": "Ekmek",
+    "Pasta": "{{brand}} Makarna",
+    "Rice": "{{brand}} Pirinç",
+    "Olive Oil": "{{brand}} Zeytin Yağı",
+    "Tomato Paste": "{{brand}} Salça",
+    "Average Number Of Customers Per Hour": "Saat Başına Ortalama Müşteri Sayısı"
   }
 }

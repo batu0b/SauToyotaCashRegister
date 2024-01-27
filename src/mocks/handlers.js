@@ -1,5 +1,7 @@
 import { http, HttpResponse, delay } from "msw";
-import user from "./dummy_users.json";
+import user from "./data/dummy_users.json";
+import charts from "./data/dummy_charts.json";
+
 const url = import.meta.env.VITE_APP_API_URL;
 
 export const handlers = [
@@ -27,5 +29,15 @@ export const handlers = [
       return HttpResponse.json();
     }
     return HttpResponse.json({}, { status: 503 });
+  }),
+
+  http.get(`${url}/charts/:userCode`, async ({ params }) => {
+    const userCharts = charts.find((x) => x.userCode === parseInt(params.userCode));
+    await delay(1200);
+    if (!!userCharts) {
+      const { userCode, ...res } = userCharts;
+      return HttpResponse.json(res);
+    }
+    return HttpResponse.json({}, { status: 404 });
   }),
 ];

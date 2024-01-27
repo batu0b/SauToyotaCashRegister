@@ -1,0 +1,90 @@
+[
+  {
+    "userCode": 2,
+    "lastWeekSales": {
+      "title": "My Sales in the Last 1 Week",
+      "data": [
+        { "name": "Mon", "total": 200 },
+        { "name": "Tue", "total": 500 },
+        { "name": "Wed", "total": 200 },
+        { "name": "Thu", "total": 800 },
+        { "name": "Fri", "total": 360 },
+        { "name": "Sat", "total": 550 },
+        { "name": "Sun", "total": 340 }
+      ]
+    },
+    "bestSeller": {
+      "title": "Best Sellers Of The Week",
+      "data": [
+        { "name": "Bread", "total": 700, "brand": null },
+        { "name": "Pasta", "total": 450, "brand": "Barilla" },
+        { "name": "Rice", "total": 500, "brand": "Yayla" },
+        { "name": "Olive Oil", "total": 300, "brand": "Komili" },
+        { "name": "Tomato Paste", "total": 560, "brand": "Tat" }
+      ]
+    },
+    "averageCustomer": {
+      "title": "Average Number Of Customers Per Hour",
+      "data": [
+        { "name": "8.00", "average": 50 },
+        { "name": "9.00", "average": 60 },
+        { "name": "10.00", "average": 54 },
+        { "name": "11.00", "average": 67 },
+        { "name": "12.00", "average": 80 },
+        { "name": "13.00", "average": 30 },
+        { "name": "14.00", "average": 60 },
+        { "name": "15.00", "average": 50 },
+        { "name": "16.00", "average": 40 },
+        { "name": "17.00", "average": 45 },
+        { "name": "18.00", "average": 100 },
+        { "name": "19.00", "average": 120 },
+        { "name": "20.00", "average": 110 },
+        { "name": "21.00", "average": 80 }
+      ]
+    }
+  },
+  {
+    "userCode": 1,
+    "lastWeekSales": {
+      "title": "My Sales in the Last 1 Week",
+      "data": [
+        { "name": "Mon", "total": 400 },
+        { "name": "Tue", "total": 500 },
+        { "name": "Wed", "total": 600 },
+        { "name": "Thu", "total": 700 },
+        { "name": "Fri", "total": 300 },
+        { "name": "Sat", "total": 370 },
+        { "name": "Sun", "total": 670 }
+      ]
+    },
+    "bestSeller": {
+      "title": "Best Sellers Of The Week",
+      "data": [
+        { "name": "Bread", "total": 700, "brand": null },
+        { "name": "Pasta", "total": 450, "brand": "Barilla" },
+        { "name": "Rice", "total": 500, "brand": "Yayla" },
+        { "name": "Olive Oil", "total": 300, "brand": "Komili" },
+        { "name": "Tomato Paste", "total": 560, "brand": "Tat" }
+      ]
+    },
+    "averageCustomer": {
+      "title": "Average Number Of Customers Per Hour",
+      "data": [
+        { "name": "8.00", "average": 50 },
+        { "name": "9.00", "average": 60 },
+        { "name": "10.00", "average": 54 },
+        { "name": "11.00", "average": 67 },
+        { "name": "12.00", "average": 80 },
+        { "name": "13.00", "average": 30 },
+        { "name": "14.00", "average": 60 },
+        { "name": "15.00", "average": 50 },
+        { "name": "16.00", "average": 40 },
+        { "name": "17.00", "average": 45 },
+        { "name": "18.00", "average": 100 },
+        { "name": "19.00", "average": 120 },
+        { "name": "20.00", "average": 110 },
+        { "name": "21.00", "average": 80 }
+      ]
+    }
+  }
+]

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import useColorTheme from "./useColorTheme";
+import useColorTheme from "../../hooks/useColorTheme";
 
 export const ThemeContext = createContext({
   mode: "",
