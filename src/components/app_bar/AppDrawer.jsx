@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Drawer, Typography } from "@mui/material";
+import { Badge, Box, Divider, Drawer, Typography } from "@mui/material";
 import { useServerStatusContex } from "../../context/server_status/ServerStatusContex";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "../../context/auth/AuthContext";
@@ -13,7 +13,6 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import { MatchesAppBar } from "./MatchesAppBar";
 import { DrawerList } from "./DrawerList";
-import { useThemeContext } from "../../context/theme/ThemeContext";
 
 export const AppDrawer = ({ matches }) => {
   const { pathname } = useLocation();
@@ -23,8 +22,7 @@ export const AppDrawer = ({ matches }) => {
   const { serverIsAlive } = useServerStatusContex();
 
   const { t } = useTranslation();
-  const { user, logOut } = useAuthContext();
-  const { toggleColorMode } = useThemeContext();
+  const { user } = useAuthContext();
 
   const handleDrawer = () => {
     setOpen((prev) => !prev);
@@ -71,7 +69,11 @@ export const AppDrawer = ({ matches }) => {
     {
       pathname: "/basket",
       name: "Basket",
-      ico: <ShoppingBasketIcon />,
+      ico: (
+        <Badge badgeContent={8} color="secondary">
+          <ShoppingBasketIcon />
+        </Badge>
+      ),
       method: handleNavigation,
     },
     {
@@ -96,7 +98,7 @@ export const AppDrawer = ({ matches }) => {
       ) : null}
       <Drawer
         sx={{
-          width: 240,
+          width: 210,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: 210,
