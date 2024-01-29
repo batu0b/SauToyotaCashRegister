@@ -5,9 +5,11 @@ export const ContainerDiv = ({
   sx = {},
   tooolbarIsActive = true,
   toolbarSx,
+  ...props
 }) => {
   return (
     <Container
+      {...props}
       maxWidth={maxWidth}
       sx={[
         (theme) => ({
