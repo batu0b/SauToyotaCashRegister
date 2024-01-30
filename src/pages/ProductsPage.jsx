@@ -1,7 +1,6 @@
 import { ContainerDiv } from "../components/ContainerDiv";
 import { useOutletContext } from "react-router-dom";
 import { Box, CircularProgress, TextField, Typography } from "@mui/material";
-import { ProductCard } from "../components/ProductCard";
 import {
   useCallback,
   useEffect,
@@ -10,18 +9,14 @@ import {
   useTransition,
 } from "react";
 import { CategoryMenuBar } from "../components/CategoryMenuBar";
+import VirtualProductList from "../components/product/VirtualProductList";
 
-//TODO make virtual
 export default function ProductsPage() {
   const { categories, products } = useOutletContext();
   const [currentCategory, setCurrentCategory] = useState("");
   const [currentData, setCurrentData] = useState(null);
+  const [isLoading, setIsLoading] = useState();
   const [isPending, startTransition] = useTransition();
-
-  const categoryName = useMemo(
-    () => categories.find((x) => x.url === currentCategory).category,
-    [currentCategory]
-  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,16 +25,25 @@ export default function ProductsPage() {
   }, []);
 
   const handleSetDataByCategory = useCallback((x) => {
-    startTransition(() => {
-      setCurrentCategory(x.url);
-      const newData = products.filter((product) =>
-        x.url === "" ? product : product.category_name === x.category
-      );
-      setCurrentData(newData);
-    });
+    const newData = products.filter((product) =>
+      x.url === "" ? product : product.category_name === x.category
+    );
+    setIsLoading(true);
+    setTimeout(() => {
+      startTransition(() => {
+        setCurrentCategory(x.url);
+        setCurrentData(newData);
+        setIsLoading(false);
+      });
+    }, 400);
   }, []);
 
-  if (isPending || !currentData) {
+  const categoryName = useMemo(
+    () => categories.find((x) => x.url === currentCategory).category,
+    [currentCategory]
+  );
+
+  if (isPending || !currentData || isLoading) {
     return (
       <ContainerDiv>
         <CircularProgress size={32} />
@@ -76,18 +80,11 @@ export default function ProductsPage() {
           [theme.breakpoints.down("sm")]: {
             height: "calc(100vh - 184px)",
           },
-          overflowY: "auto",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: 3,
           paddingBottom: 1,
           paddingX: 2,
         })}
       >
-        {currentData.map((x) => (
-          <ProductCard product={x} key={x.id} />
-        ))}
+        <VirtualProductList data={currentData} />
       </Box>
       <Box
         sx={{

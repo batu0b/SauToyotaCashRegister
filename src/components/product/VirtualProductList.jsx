@@ -3,25 +3,22 @@ import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 import Masonry, {
   createCellPositioner,
 } from "react-virtualized/dist/es/Masonry";
+import { ProductCard } from "./ProductCard";
 
-const GridExample = () => {
-  const [columnWidth, setColumnWidth] = React.useState(200);
-  const [height, setHeight] = React.useState(300);
-  const [gutterSize, setGutterSize] = React.useState(10);
-  const [overscanByPixels, setOverscanByPixels] = React.useState(30);
+const VirtualProductList = ({ data }) => {
+  const [columnWidth, setColumnWidth] = React.useState(300);
+  const [gutterSize, setGutterSize] = React.useState(20);
+  const [overscanByPixels, setOverscanByPixels] = React.useState(120);
   const [columnCount, setColumnCount] = React.useState(0);
-
-  const [cache] = React.useState(
+  const [cache, setCatche] = React.useState(
     new CellMeasurerCache({
-      defaultHeight: 250,
-      defaultWidth: 200,
+      defaultHeight: 500,
+      defaultWidth: 300,
       fixedWidth: true,
     })
   );
 
   const widthRef = React.useRef(0);
-  const heightRef = React.useRef(0);
-  const scrollTopRef = React.useRef(0);
   const masonryRef = React.useRef(null);
   const cellPositionerRef = React.useRef(null);
 
@@ -29,7 +26,6 @@ const GridExample = () => {
     calculateColumnCount();
     resetCellPositioner();
     if (masonryRef.current) {
-      console.log("run");
       masonryRef.current.recomputeCellPositions();
     }
   }, [columnWidth, gutterSize, widthRef.current]);
@@ -41,28 +37,7 @@ const GridExample = () => {
   const cellRenderer = ({ index, key, parent, style }) => {
     return (
       <CellMeasurer cache={cache} index={index} key={key} parent={parent}>
-        <div
-          style={{
-            ...style,
-            width: columnWidth,
-            background: "red",
-          }}
-        >
-          <div
-            style={{
-              borderRadius: "0.5rem",
-              marginBottom: "0.5rem",
-              width: "100%",
-              fontSize: 20,
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {index}
-          </div>
-        </div>
+        <ProductCard style={style} product={data[index]} />
       </CellMeasurer>
     );
   };
@@ -80,45 +55,27 @@ const GridExample = () => {
 
   const onResize = ({ width }) => {
     widthRef.current = width;
-    // calculateColumnCount();
-    // resetCellPositioner();
-    // if (masonryRef.current) {
-    //   masonryRef.current.recomputeCellPositions();
-    // }
+    calculateColumnCount();
+    resetCellPositioner();
+    if (masonryRef.current) {
+      masonryRef.current.recomputeCellPositions();
+    }
   };
 
-  const renderAutoSizer = ({ height, scrollTop }) => {
-    heightRef.current = height;
-    scrollTopRef.current = scrollTop;
-    return (
-      <AutoSizer
-        disableHeight
-        style={{ height: "100%", background: "blue" }}
-        onResize={onResize}
-        overscanByPixels={overscanByPixels}
-        scrollTop={scrollTop}
-      >
-        {renderMasonry}
-      </AutoSizer>
-    );
-  };
-
-  const renderMasonry = ({ width }) => {
+  const renderMasonry = ({ width, height }) => {
     widthRef.current = width;
     calculateColumnCount();
     initCellPositioner();
     return (
       <Masonry
         autoHeight={false}
-        style={{ background: "blue" }}
-        cellCount={1000}
+        cellCount={data.length}
         cellMeasurerCache={cache}
         cellPositioner={cellPositionerRef.current}
         cellRenderer={cellRenderer}
         height={height}
         overscanByPixels={overscanByPixels}
         ref={masonryRef}
-        scrollTop={scrollTopRef.current}
         width={width}
       />
     );
@@ -134,7 +91,7 @@ const GridExample = () => {
     }
   };
 
-  return <>{renderAutoSizer({ height })}</>;
+  return <AutoSizer onResize={onResize}>{renderMasonry}</AutoSizer>;
 };
 
-export default GridExample;
+export default VirtualProductList;

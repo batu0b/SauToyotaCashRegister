@@ -12,16 +12,14 @@ import { AuthContextProvider } from "./context/auth/AuthContextProvider.jsx";
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 worker.start().then(() =>
   ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <BrowserRouter>
-        <ThemeContextProvider>
-          <AuthContextProvider>
-            <ServerStatusContexProvider>
-              <App />
-            </ServerStatusContexProvider>
-          </AuthContextProvider>
-        </ThemeContextProvider>
-      </BrowserRouter>
-    </React.StrictMode>
+    <BrowserRouter>
+      <ThemeContextProvider>
+        <AuthContextProvider>
+          <ServerStatusContexProvider>
+            <App />
+          </ServerStatusContexProvider>
+        </AuthContextProvider>
+      </ThemeContextProvider>
+    </BrowserRouter>
   )
 );

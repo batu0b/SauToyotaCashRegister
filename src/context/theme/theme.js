@@ -70,7 +70,6 @@ export const getDesignTokens = (mode) => ({
           color: "#eee",
         }),
         "*": {
-          scrollbarWidth: "thin",
           scrollbarColor: props.palette.background.paper,
         },
         "*::-webkit-scrollbar": {

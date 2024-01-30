@@ -11,13 +11,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 export const ProductCard = ({ product, style }) => {
   return (
     <Card
+      style={style}
       sx={{
         width: 300,
-        flexShrink: 0,
         borderRadius: 1,
+        height: 500,
       }}
     >
-      <CardContent sx={{ minHeight: "10.5rem" }}>
+      <CardContent sx={{ height: "10.5rem" }}>
         <Typography sx={{ color: "secondary.main" }} variant="h6">
           {product.name}
         </Typography>

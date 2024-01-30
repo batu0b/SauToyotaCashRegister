@@ -9,7 +9,7 @@ import StoreErrorPage from "../pages/StoreErrorPage";
 import SalePage from "../pages/SalePage";
 import { ProductsLayout } from "../layouts/ProductsLayout";
 import ProductsPage from "../pages/ProductsPage";
-import { Test2 } from "../pages/Test2";
+
 export const PageRouter = () => {
   return (
     <Routes>
@@ -17,7 +17,7 @@ export const PageRouter = () => {
         <Route element={<ServerStatusLayout />}>
           <Route index path="/" element={<HomePage />} />
           <Route element={<ProductsLayout />}>
-            <Route path="/products" element={<Test2 />} />
+            <Route path="/products" element={<ProductsPage />} />
             <Route path="/sale" element={<SalePage />} />
           </Route>
         </Route>
