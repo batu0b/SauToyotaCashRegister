@@ -1,11 +1,19 @@
 import { Container, Toolbar } from "@mui/material";
-export const ContainerDiv = ({ children, maxWidth = false, sx = {} }) => {
+export const ContainerDiv = ({
+  children,
+  maxWidth = false,
+  sx = {},
+  tooolbarIsActive = true,
+  toolbarSx,
+  ...props
+}) => {
   return (
     <Container
+      {...props}
       maxWidth={maxWidth}
       sx={[
-        {
-          padding: 2,
+        (theme) => ({
+          padding: 0,
           minHeight: "100vh",
           display: "flex",
           flexWrap: "nowrap",
@@ -13,11 +21,16 @@ export const ContainerDiv = ({ children, maxWidth = false, sx = {} }) => {
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-        },
+          [theme.breakpoints.down("md")]: {
+            width: "100%",
+          },
+          width: "calc(100% - 210px)",
+        }),
         sx,
       ]}
     >
-      <Toolbar />
+      {tooolbarIsActive ? <Toolbar sx={toolbarSx} /> : null}
+
       {children}
     </Container>
   );

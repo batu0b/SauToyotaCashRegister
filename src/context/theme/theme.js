@@ -70,22 +70,21 @@ export const getDesignTokens = (mode) => ({
           color: "#eee",
         }),
         "*": {
-          scrollbarWidth: "thin",
           scrollbarColor: props.palette.background.paper,
         },
         "*::-webkit-scrollbar": {
           height: 12,
-          width: 12,
+          width: 16,
         },
         "*::-webkit-scrollbar-track": {
           borderRadius: 5,
-          backgroundColor: props.palette.background.default,
+          backgroundColor: props.palette.customSecondary,
         },
         "*::-webkit-scrollbar-track:hover": {
-          backgroundColor: props.palette.background.default,
+          backgroundColor: props.palette.customSecondary,
         },
         "*::-webkit-scrollbar-track:active": {
-          backgroundColor: props.palette.background.default,
+          backgroundColor: props.palette.customSecondary,
         },
         "*::-webkit-scrollbar-thumb": {
           borderRadius: 5,
