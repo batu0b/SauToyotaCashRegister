@@ -1,55 +1,128 @@
 import { ContainerDiv } from "../components/ContainerDiv";
-import { useOutletContext } from "react-router-dom";
-import { Box, CircularProgress, TextField, Typography } from "@mui/material";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-} from "react";
-import { CategoryMenuBar } from "../components/CategoryMenuBar";
+import { useOutletContext, useSearchParams } from "react-router-dom";
+import { Box, Button, CircularProgress } from "@mui/material";
+import { useCallback, useEffect, useState, useTransition } from "react";
 import VirtualProductList from "../components/product/VirtualProductList";
-
+import { BottomBar } from "../components/product/BottomBar";
+import {
+  customLocaleCompare,
+  customLocaleLowerCase,
+  getFavorites,
+} from "../helpers";
+import { TopFilterSelect } from "../components/product/TopFilterSelect";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useAuthContext } from "../context/auth/AuthContext";
+const topSections = [
+  "A",
+  "B",
+  "C-D",
+  "E-F",
+  "G-I",
+  "K",
+  "L-N",
+  "P",
+  "R-S",
+  "Ş-T",
+  "Ü-Z",
+];
+//TODO change lng for labels and add to fav
 export default function ProductsPage() {
   const { categories, products } = useOutletContext();
-  const [currentCategory, setCurrentCategory] = useState("");
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const [searcParam, setSearchParams] = useSearchParams();
+  const [filterByAlpahbet, setFilterByAlpahbet] = useState("-");
   const [currentData, setCurrentData] = useState(null);
   const [isLoading, setIsLoading] = useState();
+  const [isFavorites, setIsFavorites] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [query, setQuery] = useState("");
+  const { user } = useAuthContext();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCurrentData(products);
-    }, 200);
-  }, []);
+  const handleAlpahbet = (x) => {
+    if (filterByAlpahbet === "-") {
+      return true;
+    }
+    if (filterByAlpahbet.includes("-")) {
+      const newSections = filterByAlpahbet.split("-");
+      const chr1 = customLocaleLowerCase(newSections[0]);
+      const chr2 = customLocaleLowerCase(newSections[1]);
+      const base = customLocaleLowerCase(x.name.charAt(0));
+      const bigger = customLocaleCompare(base, chr1);
+      const smaller = customLocaleCompare(chr2, base);
+      return bigger && smaller;
+    } else {
+      const newData = x.name
+        .toLowerCase()
+        .startsWith(filterByAlpahbet.toLowerCase());
+      return newData;
+    }
+  };
+  const handleFilter = () => {
+    const newData = products.filter((product) => {
+      const categoryCondition =
+        currentCategory.url === ""
+          ? product
+          : product.category_name === currentCategory.category;
 
-  const handleSetDataByCategory = useCallback((x) => {
-    const newData = products.filter((product) =>
-      x.url === "" ? product : product.category_name === x.category
-    );
+      const alphabedCondition = handleAlpahbet(product);
+      const crntQuery = searcParam.get("query");
+      let queryCondition;
+
+      if (!crntQuery) {
+        queryCondition = true;
+      } else {
+        queryCondition =
+          customLocaleLowerCase(product.name).includes(
+            customLocaleLowerCase(crntQuery)
+          ) || product.barcode.includes(crntQuery.toLowerCase());
+      }
+      let showFavorites = true;
+      if (isFavorites) {
+        const favs = JSON.parse(getFavorites()) || [];
+        const userFavs = favs.find((x) => x.id === user.userCode);
+        if (userFavs) {
+          showFavorites = userFavs.products.includes(product.id);
+        } else {
+          showFavorites = false;
+        }
+      }
+
+      return (
+        alphabedCondition &&
+        categoryCondition &&
+        queryCondition &&
+        showFavorites
+      );
+    });
     setIsLoading(true);
     setTimeout(() => {
       startTransition(() => {
-        setCurrentCategory(x.url);
         setCurrentData(newData);
         setIsLoading(false);
       });
     }, 400);
-  }, []);
+  };
 
-  const categoryName = useMemo(
-    () => categories.find((x) => x.url === currentCategory).category,
-    [currentCategory]
+  const handleSetCategory = (x) => {
+    setCurrentCategory(x);
+  };
+
+  const hadnleSetAlphabetFilter = (x) => {
+    setFilterByAlpahbet(x);
+  };
+
+  const handleSearch = useCallback(
+    (e) => {
+      e.preventDefault();
+      setSearchParams({ query: query });
+    },
+    [query]
   );
 
-  if (isPending || !currentData || isLoading) {
-    return (
-      <ContainerDiv>
-        <CircularProgress size={32} />
-      </ContainerDiv>
-    );
-  }
+  useEffect(() => {
+    handleFilter();
+  }, [currentCategory, filterByAlpahbet, searcParam, isFavorites]);
 
   return (
     <ContainerDiv
@@ -59,56 +132,81 @@ export default function ProductsPage() {
           display: "unset",
         },
       })}
-      sx={{ justifyContent: "flex-start", position: "relative" }}
+      sx={{
+        justifyContent: "flex-start",
+        position: "relative",
+      }}
     >
-      <Typography
-        height={50}
-        fontSize={42}
-        sx={{ display: "flex", alignItems: "center", alignSelf: "flex-start" }}
+      <Box
+        sx={{
+          height: 70,
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          borderBottom: 1,
+          borderBottomColor: "customSecondary",
+          borderBottomStyle: "solid",
+          justifyContent: "center",
+          gap: 2,
+        }}
       >
-        {categoryName}
-      </Typography>
-
+        <Button onClick={() => setIsFavorites((prev) => !prev)}>
+          {isFavorites ? (
+            <StarIcon color="primary" />
+          ) : (
+            <StarBorderIcon color="primary" />
+          )}
+        </Button>
+        <TopFilterSelect
+          currentValue={filterByAlpahbet}
+          list={["-", ...topSections]}
+          handleSelect={hadnleSetAlphabetFilter}
+          label={"Filter By Alphabet Or Favorites"}
+        />
+        <TopFilterSelect
+          currentValue={currentCategory}
+          list={categories}
+          showCustomValue={(x) => x.category}
+          handleSelect={handleSetCategory}
+          label={"Filter By Category"}
+        />
+      </Box>
       <Box
         sx={(theme) => ({
           width: "100%",
           marginTop: "10px",
-          height: "calc(100vh - 120px)",
+          height: "calc(100vh - 140px)",
           [theme.breakpoints.down("md")]: {
-            height: "calc(100vh - 184px)",
+            height: "calc(100vh - 204px)",
           },
           [theme.breakpoints.down("sm")]: {
-            height: "calc(100vh - 184px)",
+            height: "calc(100vh - 204px)",
           },
           paddingBottom: 1,
           paddingX: 2,
         })}
       >
-        <VirtualProductList data={currentData} />
+        {isLoading || isPending || !currentData ? (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress size={32} />
+          </div>
+        ) : (
+          <VirtualProductList data={currentData} />
+        )}
       </Box>
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          borderTop: "2px solid ",
-          borderColor: "customSecondary",
-          height: "60px",
-          display: "flex",
-          justifyContent: "space-evenly",
-          bgcolor: "customSecondary",
-          alignItems: "center",
-          px: 2,
-        }}
-      >
-        <TextField size="small" label="search" aria-readonly={true} />
-        <CategoryMenuBar
-          setCategory={handleSetDataByCategory}
-          categories={categories}
-          currentCategory={currentCategory}
-        />
-      </Box>
+      <BottomBar
+        handleSearch={handleSearch}
+        query={query}
+        setQuery={setQuery}
+      />
     </ContainerDiv>
   );
 }

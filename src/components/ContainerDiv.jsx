@@ -13,7 +13,6 @@ export const ContainerDiv = ({
       maxWidth={maxWidth}
       sx={[
         (theme) => ({
-          padding: 0,
           minHeight: "100vh",
           display: "flex",
           flexWrap: "nowrap",
