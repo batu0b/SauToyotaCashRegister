@@ -1,6 +1,6 @@
 import { ContainerDiv } from "../components/ContainerDiv";
 import { useOutletContext, useSearchParams } from "react-router-dom";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import VirtualProductList from "../components/product/VirtualProductList";
 import { BottomBar } from "../components/product/BottomBar";
@@ -27,12 +27,12 @@ const topSections = [
   "Ş-T",
   "Ü-Z",
 ];
-//TODO custom item for categeries 
+//TODO custom item for categeries
 export default function ProductsPage() {
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
-  const [searcParam, setSearchParams] = useSearchParams();
+  const [searchParam, setSearchParams] = useSearchParams();
   const [filterByAlpahbet, setFilterByAlpahbet] = useState("-");
   const [currentData, setCurrentData] = useState(null);
   const [isLoading, setIsLoading] = useState();
@@ -40,6 +40,8 @@ export default function ProductsPage() {
   const [isPending, startTransition] = useTransition();
   const [query, setQuery] = useState("");
   const { user } = useAuthContext();
+
+  console.log("searchParam", searchParam && searchParam.get("query"));
 
   const handleAlpahbet = (x) => {
     if (filterByAlpahbet === "-") {
@@ -68,7 +70,7 @@ export default function ProductsPage() {
           : product.category_name === currentCategory.category;
 
       const alphabedCondition = handleAlpahbet(product);
-      const crntQuery = searcParam.get("query");
+      const crntQuery = searchParam.get("query");
       let queryCondition;
 
       if (!crntQuery) {
@@ -127,7 +129,7 @@ export default function ProductsPage() {
   };
   useEffect(() => {
     handleFilter();
-  }, [currentCategory, filterByAlpahbet, searcParam, isFavorites]);
+  }, [currentCategory, filterByAlpahbet, searchParam, isFavorites]);
 
   return (
     <ContainerDiv
@@ -203,8 +205,20 @@ export default function ProductsPage() {
           >
             <CircularProgress size={32} />
           </div>
-        ) : (
+        ) : currentData.length > 0 ? (
           <VirtualProductList data={currentData} />
+        ) : (
+          <Box
+            sx={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h5">{t("productnotfound")}</Typography>
+          </Box>
         )}
       </Box>
       <BottomBar

@@ -96,6 +96,9 @@ export const getDesignTokens = (mode) => ({
         "*::-webkit-scrollbar-thumb:active": {
           backgroundColor: props.palette.secondary.main,
         },
+        "#html5-qrcode-button-camera-stop": {
+          display: "none!important",
+        },
       }),
     },
     MuiButton: {
@@ -107,16 +110,5 @@ export const getDesignTokens = (mode) => ({
   },
   shape: {
     borderRadius: 7,
-  },
-});
-
-const asd = createTheme({
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: (props) => ({
-        scrollbarWidth: "thin",
-        scrollbarColor: props.palette.secondary.light,
-      }),
-    },
   },
 });

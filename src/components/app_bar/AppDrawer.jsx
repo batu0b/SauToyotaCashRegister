@@ -13,17 +13,24 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import { MatchesAppBar } from "./MatchesAppBar";
 import { DrawerList } from "./DrawerList";
+import { QrModal } from "../qr/QrModal";
 
 export const AppDrawer = ({ matches }) => {
   const { pathname } = useLocation();
   const navigation = useNavigate();
-
+  const [showQrModal, setShowQrModal] = useState(false);
   const [open, setOpen] = useState(false);
   const { serverIsAlive } = useServerStatusContex();
 
   const { t } = useTranslation();
   const { user } = useAuthContext();
-
+  const handleQrModal = () => {
+    setShowQrModal(true);
+    handleDrawer();
+  };
+  const handleCloseQrModal = () => {
+    setShowQrModal(false);
+  };
   const handleDrawer = () => {
     setOpen((prev) => !prev);
   };
@@ -56,7 +63,7 @@ export const AppDrawer = ({ matches }) => {
       pathname: "/qr",
       name: "Qr",
       ico: <QrCodeIcon />,
-      method: () => console.log("test"),
+      method: handleQrModal,
     },
     {
       pathname: "/campaigns",
@@ -161,6 +168,7 @@ export const AppDrawer = ({ matches }) => {
         <DrawerList list={downNav} currentPathname={pathname} translator={t} />
         <Divider />
       </Drawer>
+      <QrModal handleClose={handleCloseQrModal} open={showQrModal} />
     </>
   );
 };

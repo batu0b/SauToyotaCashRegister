@@ -14,6 +14,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import { getFavorites, setFavorites } from "../../helpers";
 import { useAuthContext } from "../../context/auth/AuthContext";
+//TODO lang
 export const ProductCard = ({ product, style }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useAuthContext();

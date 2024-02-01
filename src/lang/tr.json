@@ -43,6 +43,9 @@
     "Average Number Of Customers Per Hour": "Saat Başına Ortalama Müşteri Sayısı",
     "searchBarLabel": "Ürün Veya Barkod Arayın",
     "filterAlphabetLabel": "Alfabeye Göre Filtrele ",
-    "filterCategoryLabel": "Kategoriye Göre Filtrele"
+    "filterCategoryLabel": "Kategoriye Göre Filtrele",
+    "productnotfound": "Ürün Bulunamadı",
+    "goToProduct": "Ürüne Git",
+    "scanAgain": "Tekrar Tara"
   }
 }
