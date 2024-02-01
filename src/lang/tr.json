@@ -40,6 +40,9 @@
     "Rice": "{{brand}} Pirinç",
     "Olive Oil": "{{brand}} Zeytin Yağı",
     "Tomato Paste": "{{brand}} Salça",
-    "Average Number Of Customers Per Hour": "Saat Başına Ortalama Müşteri Sayısı"
+    "Average Number Of Customers Per Hour": "Saat Başına Ortalama Müşteri Sayısı",
+    "searchBarLabel": "Ürün Veya Barkod Arayın",
+    "filterAlphabetLabel": "Alfabeye Göre Filtrele ",
+    "filterCategoryLabel": "Kategoriye Göre Filtrele"
   }
 }

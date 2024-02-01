@@ -13,6 +13,7 @@ import { TopFilterSelect } from "../components/product/TopFilterSelect";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useAuthContext } from "../context/auth/AuthContext";
+import { useTranslation } from "react-i18next";
 const topSections = [
   "A",
   "B",
@@ -26,8 +27,9 @@ const topSections = [
   "Ş-T",
   "Ü-Z",
 ];
-//TODO change lng for labels and add to fav
+//TODO custom item for categeries 
 export default function ProductsPage() {
+  const { t } = useTranslation();
   const { categories, products } = useOutletContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [searcParam, setSearchParams] = useSearchParams();
@@ -119,7 +121,10 @@ export default function ProductsPage() {
     },
     [query]
   );
-
+  const handleResetSearch = () => {
+    setSearchParams({ query: "" });
+    setQuery("");
+  };
   useEffect(() => {
     handleFilter();
   }, [currentCategory, filterByAlpahbet, searcParam, isFavorites]);
@@ -161,14 +166,14 @@ export default function ProductsPage() {
           currentValue={filterByAlpahbet}
           list={["-", ...topSections]}
           handleSelect={hadnleSetAlphabetFilter}
-          label={"Filter By Alphabet Or Favorites"}
+          label={t("filterAlphabetLabel")}
         />
         <TopFilterSelect
           currentValue={currentCategory}
           list={categories}
           showCustomValue={(x) => x.category}
           handleSelect={handleSetCategory}
-          label={"Filter By Category"}
+          label={t("filterCategoryLabel")}
         />
       </Box>
       <Box
@@ -203,6 +208,7 @@ export default function ProductsPage() {
         )}
       </Box>
       <BottomBar
+        handleReset={handleResetSearch}
         handleSearch={handleSearch}
         query={query}
         setQuery={setQuery}

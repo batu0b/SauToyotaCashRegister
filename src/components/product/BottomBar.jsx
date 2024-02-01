@@ -1,8 +1,10 @@
 import { Fab, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-export const BottomBar = ({ handleSearch, setQuery, query }) => {
+import ReplayIcon from "@mui/icons-material/Replay";
+import { useTranslation } from "react-i18next";
+export const BottomBar = ({ handleSearch, setQuery, query, handleReset }) => {
+  const {t} = useTranslation()
   return (
     <Box
       sx={{
@@ -34,14 +36,23 @@ export const BottomBar = ({ handleSearch, setQuery, query }) => {
             alignItems: "center",
             position: "relative",
             width: "100%",
+            gap: 1,
           }}
         >
+          <Fab
+            onClick={handleReset}
+            type="button"
+            variant="extended"
+            size="small"
+          >
+            <ReplayIcon />
+          </Fab>
           <TextField
             fullWidth
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             size="small"
-            label="search"
+            label={t("searchBarLabel")}
             aria-readonly={true}
           />
           <Fab

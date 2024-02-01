@@ -40,6 +40,9 @@
     "Rice": "{{brand}} Rice",
     "Olive Oil": "{{brand}} Olive Oil",
     "Tomato Paste": "{{brand}} Tomato Paste",
-    "Average Number Of Customers Per Hour": "Average Number Of Customers Per Hour"
+    "Average Number Of Customers Per Hour": "Average Number Of Customers Per Hour",
+    "searchBarLabel": "Search For Product Or Barcode",
+    "filterAlphabetLabel": "Filter By Alphabet",
+    "filterCategoryLabel": "Filter By Category"
   }
 }
