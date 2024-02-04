@@ -19,6 +19,7 @@ export const getDesignTokens = (mode) => ({
             default: "#eeeeee",
           },
           customSecondary: "#ffff",
+          customInput: "#efffff",
         }
       : {
           primary: {
@@ -37,6 +38,7 @@ export const getDesignTokens = (mode) => ({
             secondary: "#f3e5f5",
           },
           customSecondary: "#272727",
+          customInput: "#303030",
         }),
   },
   components: {
@@ -99,6 +101,12 @@ export const getDesignTokens = (mode) => ({
         "#html5-qrcode-button-camera-stop": {
           display: "none!important",
         },
+        "#html5qr-code-full-region img": {
+          display: "none!important",
+        },
+        "#html5-qrcode-anchor-scan-type-change": {
+          display: "none!important",
+        },
       }),
     },
     MuiButton: {
@@ -106,6 +114,16 @@ export const getDesignTokens = (mode) => ({
         variant: "contained",
         color: "secondary",
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      "sm-md": 750,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
     },
   },
   shape: {

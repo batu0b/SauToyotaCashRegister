@@ -24,10 +24,17 @@ export const QrModal = ({ open, handleClose }) => {
       setResult(null);
     };
     const goToProduct = () => {
-      navigate({
-        pathname: "/products",
-        search: `query=${result}`,
-      });
+      navigate(
+        {
+          pathname: "/products",
+          search: `query=${result}`,
+        },
+        {
+          state: {
+            reset: true,
+          },
+        }
+      );
       resetAndHandleClose();
     };
 
@@ -60,7 +67,8 @@ export const QrModal = ({ open, handleClose }) => {
           display: "flex",
           alignItems: "center",
           [theme.breakpoints.down("md")]: {
-            width: "100%",
+            width: 500,
+            height: 500,
           },
         })}
       >

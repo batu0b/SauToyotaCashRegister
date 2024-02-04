@@ -26,6 +26,7 @@
     "react-i18next": "^14.0.1",
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.21.3",
+    "react-simple-keyboard": "^3.7.77",
     "react-virtualized": "^9.22.5",
     "react-virtualized-auto-sizer": "^1.0.21",
     "recharts": "^2.10.4",

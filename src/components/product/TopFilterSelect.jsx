@@ -6,6 +6,7 @@ export const TopFilterSelect = ({
   showCustomValue,
   handleSelect,
   label,
+  localSections,
   sx,
 }) => {
   return (
@@ -25,6 +26,14 @@ export const TopFilterSelect = ({
         }}
         labelId={label + "-label"}
       >
+        {localSections &&
+          localSections?.map((x) => {
+            return (
+              <MenuItem key={x} value={x} onClick={() => handleSelect(x)}>
+                {showCustomValue ? showCustomValue(x) : x}
+              </MenuItem>
+            );
+          })}
         {list.map((x) => {
           return (
             <MenuItem key={x} value={x} onClick={() => handleSelect(x)}>
