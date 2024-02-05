@@ -1,26 +1,74 @@
 import { useEffect, useState } from "react";
 import { BasketContext } from "./BasketContext";
+import { useAxios } from "../../hooks/useAxios";
 
 export const BasketContexProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const [currentPromotion, setCurrentPromotion] = useState(null);
+  const { response, isLoading, error } = useAxios({
+    url: "/promotions",
+    method: "GET",
+  });
+  const [promotions, setPromotions] = useState(null);
+  const calculateTotal = () => {
+    switch (currentPromotion.type) {
+      case "3for2": {
+        let newtotal = subTotal;
+        const cartItem = cart.find(
+          (item) => item.id === currentPromotion.productId
+        );
+        if (cartItem && cartItem.count >= currentPromotion.requiredQuantity) {
+          const itemPrice = parseFloat(cartItem.price);
+          const discountedQuantity =
+            Math.floor(cartItem.count / currentPromotion.requiredQuantity) *
+            (currentPromotion.requiredQuantity -
+              currentPromotion.discountedQuantity);
+          const discountPrice = discountedQuantity * itemPrice;
+
+          newtotal -= discountPrice;
+        }
+        return parseFloat(newtotal).toFixed(2);
+      }
+      case "discount":
+        return (
+          subTotal -
+          (subTotal * currentPromotion.discountAmount) / 100
+        ).toFixed(2);
+      default:
+        break;
+    }
+  };
+  useEffect(() => {
+    if (response?.data) {
+      setPromotions(response?.data);
+    }
+  }, [response]);
 
   useEffect(() => {
     if (cart.length > 0) {
-      setTotal(() =>
-        cart.reduce(
-          (toplam, cartItem) =>
-            (toplam = toplam + cartItem.count * parseFloat(cartItem.price)),
-          0
-        )
+      setSubTotal(() =>
+        cart
+          .reduce(
+            (toplam, cartItem) =>
+              (toplam = toplam + cartItem.count * parseFloat(cartItem.price)),
+            0
+          )
+          .toFixed(2)
       );
+    } else {
+      setSubTotal(parseFloat(0).toFixed(2));
     }
   }, [cart]);
 
   useEffect(() => {
-    setSubTotal(total);
-  }, [total]);
+    if (!currentPromotion) {
+      setTotal(subTotal);
+    } else {
+      setTotal(() => calculateTotal());
+    }
+  }, [subTotal, currentPromotion]);
 
   const addToCart = (product, count) => {
     setCart((prev) =>
@@ -79,6 +127,9 @@ export const BasketContexProvider = ({ children }) => {
         increaseProduct,
         subTotal,
         total,
+        promotions,
+        currentPromotion,
+        setCurrentPromotion,
       }}
     >
       {children}

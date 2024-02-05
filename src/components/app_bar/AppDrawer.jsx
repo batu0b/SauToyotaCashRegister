@@ -14,6 +14,7 @@ import QrCodeIcon from "@mui/icons-material/QrCode";
 import { MatchesAppBar } from "./MatchesAppBar";
 import { DrawerList } from "./DrawerList";
 import { QrModal } from "../qr/QrModal";
+import { useBasketContext } from "../../context/basket/BasketContext";
 
 export const AppDrawer = ({ matches }) => {
   const { pathname } = useLocation();
@@ -21,7 +22,7 @@ export const AppDrawer = ({ matches }) => {
   const [showQrModal, setShowQrModal] = useState(false);
   const [open, setOpen] = useState(false);
   const { serverIsAlive } = useServerStatusContex();
-
+  const { cart } = useBasketContext();
   const { t } = useTranslation();
   const { user } = useAuthContext();
   const handleQrModal = () => {
@@ -56,7 +57,11 @@ export const AppDrawer = ({ matches }) => {
     {
       pathname: "/sale",
       name: "Sale",
-      ico: <StorefrontIcon />,
+      ico: (
+        <Badge badgeContent={cart.length} color="secondary">
+          <StorefrontIcon />
+        </Badge>
+      ),
       method: handleNavigation,
     },
     {
@@ -73,16 +78,6 @@ export const AppDrawer = ({ matches }) => {
     },
   ];
   const downNav = [
-    {
-      pathname: "/basket",
-      name: "Basket",
-      ico: (
-        <Badge badgeContent={8} color="secondary">
-          <ShoppingBasketIcon />
-        </Badge>
-      ),
-      method: handleNavigation,
-    },
     {
       pathname: "/settings",
       name: "Settings",

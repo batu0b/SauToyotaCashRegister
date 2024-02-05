@@ -46,6 +46,22 @@
     "filterCategoryLabel": "Kategoriye Göre Filtrele",
     "productnotfound": "Ürün Bulunamadı",
     "goToProduct": "Ürüne Git",
-    "scanAgain": "Tekrar Tara"
+    "scanAgain": "Tekrar Tara",
+    "add2cart": "Sepete Ekle",
+    "barcode": "Barkod",
+    "price": "Fiyat",
+    "campaignList": "Kampanya Listesi",
+    "paymentScreen": "Ödeme Ekranı",
+    "cancelDocument": "Belgeyi İptal Et",
+    "cancelLine": "Satırı İptal Et",
+    "stopCanceling": "İptal Etmeyi Durdur",
+    "campaign2use": "Kullanılacak Kampanya",
+    "subTotal": "Ara Toplam",
+    "total": "Toplam",
+    "pleaseSelectCampaign": "Lütfen Kampanya Seçiniz",
+    "onlyOneDiscount": "Sadece Bir İndirimden Yararlanabilirsiniz",
+    "selected": "Seçildi",
+    "cancel": "İptal",
+    "products": "Ürünler"
   }
 }

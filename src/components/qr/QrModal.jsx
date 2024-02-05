@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { QrCodePlugin } from "./QrCodePlugin";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-//TODO lng
+
 export const QrModal = ({ open, handleClose }) => {
   const [result, setResult] = useState(null);
   const { t } = useTranslation();

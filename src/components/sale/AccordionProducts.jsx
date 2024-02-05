@@ -15,6 +15,7 @@ import usePagination from "../../hooks/usePagination";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { customLocaleLowerCase } from "../../helpers";
+import { useTranslation } from "react-i18next";
 
 const initialFilterState = {
   query: "",
@@ -23,7 +24,7 @@ const initialFilterState = {
     url: "",
   },
 };
-//TODO search kismi duzgin calismiyor
+
 export const AccordionProducts = ({
   categories,
   products,
@@ -33,10 +34,12 @@ export const AccordionProducts = ({
   const [currentCategory, setCurrentCategory] = useState(
     initialFilterState.currentCategory
   );
+  const { t } = useTranslation();
   const [query, setQuery] = useState(initialFilterState.query);
   const pageTopRef = useRef(null);
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState(initialFilterState.query);
+
   const PER_PAGE = 10;
   const _DATA = usePagination(
     products.filter((x) => {
@@ -50,7 +53,6 @@ export const AccordionProducts = ({
           : customLocaleLowerCase(x.name).includes(
               customLocaleLowerCase(query)
             ) || x.barcode === query;
-
       return queryCondition && categoryConditio;
     }),
     PER_PAGE
@@ -127,9 +129,10 @@ export const AccordionProducts = ({
               padding: 1,
               width: 120,
               textAlign: "center",
+              color: "#fff",
             }}
           >
-            SELECTED
+            {t("selected")}
           </Typography>
           <Button
             onClick={handleResetSelectedProduct}
@@ -140,7 +143,7 @@ export const AccordionProducts = ({
             }}
             color="error"
           >
-            CANCEL
+            {t("cancel")}
           </Button>
         </Box>
       ) : null}
@@ -183,7 +186,6 @@ export const AccordionProducts = ({
     _DATA.jump(1);
     pageTopRef.current.scrollTo(0, 0);
   }, [currentCategory]);
-
   return (
     <>
       <Box

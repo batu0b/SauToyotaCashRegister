@@ -18,6 +18,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { useTranslation } from "react-i18next";
+//TODO edit top sections
 const topSections = [
   "A",
   "B",
@@ -40,7 +41,7 @@ const initialFilterState = {
     url: "",
   },
 };
-//TODO https://shallowdepth.online/posts/2022/04/why-usenavigate-hook-in-react-router-v6-triggers-waste-re-renders-and-how-to-solve-it/ useNavigate icin
+//TODO categories lang
 export default function ProductsPage() {
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();

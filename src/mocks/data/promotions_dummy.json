@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Buy 3 get 2 for Lifalif Oatmeal",
+    "type": "3for2",
+    "productId": 39318,
+    "requiredQuantity": 3,
+    "discountedQuantity": 2
+  },
+  {
+    "title": "10% discount in cart",
+    "type": "discount",
+    "discountAmount": 10
+  }
+]

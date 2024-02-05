@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -14,8 +15,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import { getFavorites, setFavorites } from "../../helpers";
 import { useAuthContext } from "../../context/auth/AuthContext";
-//TODO lang
+import { useBasketContext } from "../../context/basket/BasketContext";
+import { useTranslation } from "react-i18next";
+
 export const ProductCard = ({ product, style }) => {
+  const { addToCart } = useBasketContext();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useAuthContext();
   const open = Boolean(anchorEl);
@@ -109,12 +114,22 @@ export const ProductCard = ({ product, style }) => {
         >
           {product.name}
         </Typography>
-        <Typography variant="body1" fontFamily={"monospace"}>
-          price: {product.price}
-        </Typography>
-        <Typography variant="body1" fontFamily={"monospace"}>
-          barcode: {product.barcode}
-        </Typography>
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <Typography variant="body1" fontFamily={"monospace"}>
+            {t("price")}:
+          </Typography>
+          <Typography variant="body1" fontFamily={"monospace"}>
+            {product.price}
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <Typography variant="body1" fontFamily={"monospace"}>
+            {t("barcode")}:
+          </Typography>
+          <Typography variant="body1" fontFamily={"monospace"}>
+            {product.barcode}
+          </Typography>
+        </Box>
       </CardContent>
       <CardMedia
         component="img"
@@ -123,8 +138,13 @@ export const ProductCard = ({ product, style }) => {
         alt={product.name}
       />
       <CardActions>
-        <Button size="small" fullWidth color="primary">
-          <Typography variant="button">Add To Cart</Typography>
+        <Button
+          onClick={() => addToCart(product, 1)}
+          size="small"
+          fullWidth
+          color="primary"
+        >
+          <Typography variant="button">{t("add2cart")}</Typography>
           <AddShoppingCartIcon />
         </Button>
       </CardActions>

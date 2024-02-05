@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function usePagination(data, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(Math.ceil(data.length / itemsPerPage));
 
-  useEffect(() => {
-    setMaxPage(Math.ceil(data.length / itemsPerPage)); // maxPage'i güncelle
-  }, [data, itemsPerPage]);
+  const maxPage = useMemo(
+    () => Math.ceil(data.length / itemsPerPage),
+    [data, itemsPerPage]
+  );
 
   function currentData() {
     const begin = (currentPage - 1) * itemsPerPage;
@@ -24,6 +24,7 @@ function usePagination(data, itemsPerPage) {
 
   function jump(page) {
     const pageNumber = Math.max(1, page);
+
     setCurrentPage((currentPage) => Math.min(pageNumber, maxPage));
   }
 

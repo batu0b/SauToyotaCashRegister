@@ -46,6 +46,22 @@
     "filterCategoryLabel": "Filter By Category",
     "productnotfound": "Product Not Found",
     "goToProduct": "Go To Product",
-    "scanAgain": "Scan Again"
+    "scanAgain": "Scan Again",
+    "add2cart": "Add To Cart",
+    "barcode": "Barcode",
+    "price": "Price",
+    "campaignList": "Campaign List",
+    "paymentScreen": "Payment Screen",
+    "cancelDocument": "Cancel Document",
+    "cancelLine": "Cancel Line",
+    "stopCanceling": "Stop Canceling",
+    "campaign2use": "Campaign to Use",
+    "subTotal": "Sub Total",
+    "total": "Total",
+    "pleaseSelectCampaign": "Please Select Campaign",
+    "onlyOneDiscount": "You can only benefit from one discount",
+    "selected": "Selected",
+    "cancel": "Cancel",
+    "products": "Products"
   }
 }

@@ -2,6 +2,7 @@ import { http, HttpResponse, delay } from "msw";
 import user from "./data/dummy_users.json";
 import charts from "./data/dummy_charts.json";
 import marketData from "./data/a101_market_data.json";
+import promotionsData from "./data/promotions_dummy.json";
 const url = import.meta.env.VITE_APP_API_URL;
 let serverStatus = true;
 
@@ -52,5 +53,9 @@ export const handlers = [
   http.get(`${url}/getAllProducts`, async ({}) => {
     delay(1100);
     return HttpResponse.json(marketData);
+  }),
+
+  http.get(`${url}/promotions`, async ({}) => {
+    return HttpResponse.json(promotionsData);
   }),
 ];
