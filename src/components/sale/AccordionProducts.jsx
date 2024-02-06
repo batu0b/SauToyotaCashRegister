@@ -208,6 +208,7 @@ export const AccordionProducts = ({
           </IconButton>
           <TextField
             color="secondary"
+            label={t("searchBarLabel")}
             sx={{ bgcolor: "customInput", borderRadius: 1 }}
             fullWidth
             size="small"

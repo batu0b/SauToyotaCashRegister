@@ -7,11 +7,18 @@ export const BasketContexProvider = ({ children }) => {
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [currentPromotion, setCurrentPromotion] = useState(null);
+  const [itemCount, setItemCount] = useState(0);
+  const [amountPaid, setAmountPaid] = useState(0);
+  const [cashPayment, setCashPayment] = useState(0);
+  const [cardPayment, setCardPayment] = useState(0);
+  const [promotions, setPromotions] = useState(null);
+  const [payableAmount, setPayableAmount] = useState(0);
+
   const { response, isLoading, error } = useAxios({
     url: "/promotions",
     method: "GET",
   });
-  const [promotions, setPromotions] = useState(null);
+
   const calculateTotal = () => {
     switch (currentPromotion.type) {
       case "3for2": {
@@ -40,6 +47,7 @@ export const BasketContexProvider = ({ children }) => {
         break;
     }
   };
+
   useEffect(() => {
     if (response?.data) {
       setPromotions(response?.data);
@@ -59,16 +67,28 @@ export const BasketContexProvider = ({ children }) => {
       );
     } else {
       setSubTotal(parseFloat(0).toFixed(2));
+      setCardPayment(0);
+      setCashPayment(0);
     }
+    setItemCount(cart.length);
   }, [cart]);
 
   useEffect(() => {
     if (!currentPromotion) {
       setTotal(subTotal);
     } else {
-      setTotal(() => calculateTotal());
+      const val = calculateTotal();
+      setTotal(val);
     }
   }, [subTotal, currentPromotion]);
+
+  useEffect(() => {
+    setAmountPaid((cardPayment + cashPayment).toFixed(2));
+  }, [cardPayment, cashPayment]);
+
+  useEffect(() => {
+    setPayableAmount((total - amountPaid).toFixed(2));
+  }, [amountPaid, total]);
 
   const addToCart = (product, count) => {
     setCart((prev) =>
@@ -130,6 +150,14 @@ export const BasketContexProvider = ({ children }) => {
         promotions,
         currentPromotion,
         setCurrentPromotion,
+        itemCount,
+        amountPaid,
+        cashPayment,
+        cardPayment,
+        setCardPayment,
+        setCashPayment,
+        setPayableAmount,
+        payableAmount,
       }}
     >
       {children}

@@ -62,6 +62,16 @@
     "onlyOneDiscount": "You can only benefit from one discount",
     "selected": "Selected",
     "cancel": "Cancel",
-    "products": "Products"
+    "products": "Products",
+    "addProduct": "Add Product",
+    "invoice": "Invoice",
+    "cc": "Credit Card",
+    "cash": "Cash",
+    "ccMax": "You Can Pay Less Or Equal To The Remaining Amount By Credit Card",
+    "cashMax": "You Can Complete The Payment Process And Cut The Invoince",
+    "finishDoc": "Finish Document",
+    "refund": "Refund",
+    "amountPaid": "Amount Paid",
+    "remainderOfMoney": "Remaining Amount"
   }
 }

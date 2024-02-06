@@ -2,7 +2,7 @@ import { Badge, Box, Divider, Drawer, Typography } from "@mui/material";
 import { useServerStatusContex } from "../../context/server_status/ServerStatusContex";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "../../context/auth/AuthContext";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -22,24 +22,26 @@ export const AppDrawer = ({ matches }) => {
   const [showQrModal, setShowQrModal] = useState(false);
   const [open, setOpen] = useState(false);
   const { serverIsAlive } = useServerStatusContex();
-  const { cart } = useBasketContext();
+  const { itemCount } = useBasketContext();
   const { t } = useTranslation();
   const { user } = useAuthContext();
-  const handleQrModal = () => {
+  const handleQrModal = useCallback(() => {
     setShowQrModal(true);
     handleDrawer();
-  };
-  const handleCloseQrModal = () => {
-    setShowQrModal(false);
-  };
-  const handleDrawer = () => {
-    setOpen((prev) => !prev);
-  };
+  }, []);
 
-  const handleNavigation = (x) => {
+  const handleCloseQrModal = useCallback(() => {
+    setShowQrModal(false);
+  }, []);
+
+  const handleDrawer = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  const handleNavigation = useCallback((x) => {
     navigation(x.pathname);
     handleDrawer();
-  };
+  }, []);
 
   const upperNav = [
     {
@@ -58,7 +60,7 @@ export const AppDrawer = ({ matches }) => {
       pathname: "/sale",
       name: "Sale",
       ico: (
-        <Badge badgeContent={cart.length} color="secondary">
+        <Badge badgeContent={itemCount} color="secondary">
           <StorefrontIcon />
         </Badge>
       ),

@@ -62,6 +62,16 @@
     "onlyOneDiscount": "Sadece Bir İndirimden Yararlanabilirsiniz",
     "selected": "Seçildi",
     "cancel": "İptal",
-    "products": "Ürünler"
+    "products": "Ürünler",
+    "addProduct": "Ürün Ekle",
+    "invoice": "Fatura",
+    "cc": "Kredi Kartı",
+    "cash": "Nakit",
+    "ccMax": "Kalan Tutardan Daha Azını Veya Tamamını Kredi Kartı İle Ödeyebilirsiniz",
+    "cashMax": "Ödeme Sürecini Tamamlayabilir ve Faturayı Kesebilirsiniz",
+    "finishDoc": "Belgeyi Bitir",
+    "refund": "İade",
+    "amountPaid": "Ödenen Tutar",
+    "remainderOfMoney": "Kalan Tutar"
   }
 }

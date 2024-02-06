@@ -6,14 +6,13 @@ import {
   Divider,
   Fab,
   IconButton,
-  Modal,
   TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { ContainerDiv } from "../components/ContainerDiv";
 import { VirtualKeyboard } from "../components/keyboard/VirtualKeyboard";
-import { useRef, useState } from "react";
+import { Fragment, useCallback, useRef, useState } from "react";
 import { useTheme } from "@emotion/react";
 import { CustomAccordion } from "../components/sale/CustomAccordion";
 import { useOutletContext } from "react-router-dom";
@@ -25,10 +24,14 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
 import { PromotionsModal } from "../components/sale/PromotionsModal";
 import { useTranslation } from "react-i18next";
+//
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SalePage() {
   const {
     cart,
+    itemCount,
     addToCart,
     total,
     decreaseProduct,
@@ -38,6 +41,10 @@ export default function SalePage() {
     removeFromCart,
     currentPromotion,
     setCurrentPromotion,
+    amountPaid,
+    setCardPayment,
+    setCashPayment,
+    payableAmount,
   } = useBasketContext();
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();
@@ -55,13 +62,8 @@ export default function SalePage() {
   const handleAcordion = (panel, current) => {
     setExpand((prev) => (prev === panel ? current : panel));
   };
-
   const handleAddToCart = () => {
-    if (
-      selectedProduct &&
-      numpadInput.trim().length > 0 &&
-      parseInt(numpadInput) > 0
-    ) {
+    if (selectedProduct && numpadInput.trim() && parseInt(numpadInput) > 0) {
       addToCart(selectedProduct, parseInt(numpadInput));
       setNumpadInput("");
       setSelectedProduct(null);
@@ -69,23 +71,64 @@ export default function SalePage() {
     }
   };
   const handleLineCancel = () => {
-    if (cart.length > 0) {
+    if (itemCount > 0) {
       setExpand("basket");
       setIsLineCancel(true);
     }
   };
-  const handleCancelLineCancel = () => {
+  const handleCancelLineCancel = useCallback(() => {
     setIsLineCancel(false);
+  }, []);
+
+  const handlePayment = (type) => {
+    const numInp = parseFloat(numpadInput);
+    if (numpadInput.trim() && numInp > 0) {
+      if (type === "cash") {
+        if (payableAmount > 0) {
+          setCashPayment((prev) => prev + numInp);
+        } else {
+          toast(t("cashMax"), {
+            autoClose: 1500,
+            type: "error",
+            position: "top-center",
+            theme: "colored",
+            pauseOnHover: false,
+          });
+        }
+      } else if (type === "card") {
+        if (numInp <= payableAmount) {
+          setCardPayment((prev) => prev + numInp);
+        } else {
+          toast(t("ccMax"), {
+            autoClose: 1500,
+            type: "error",
+            position: "top-center",
+            theme: "colored",
+            pauseOnHover: false,
+          });
+        }
+      }
+      setNumpadInput("");
+      keyboard.current.setInput("");
+    }
   };
+
   const getActionButtons = () => {
     switch (stage) {
       case 1:
         return (
-          <>
+          <Fragment>
             <Button onClick={() => setShowPromotions(true)} color="warning">
               {t("campaignList")}
             </Button>
-            <Button color="primary" disabled={cart.length <= 0}>
+            <Button
+              onClick={() => {
+                setStage(2);
+                setExpand("product");
+              }}
+              color="primary"
+              disabled={itemCount === 0}
+            >
               {t("paymentScreen")}
             </Button>
             <Button
@@ -98,15 +141,40 @@ export default function SalePage() {
             >
               {t("add2cart")}
             </Button>
-          </>
+          </Fragment>
         );
 
       case 2:
         return (
-          <>
-            <Button color="warning">Kampanya Listesi</Button>
-            <Button>Sepete Ürün Adeti Ekle</Button>
-          </>
+          <Fragment>
+            <Button onClick={() => setShowPromotions(true)} color="warning">
+              {t("campaignList")}
+            </Button>{" "}
+            <Button onClick={() => setStage(1)} color="primary">
+              {t("addProduct")}
+            </Button>
+            <Button onClick={() => handlePayment("card")} sx={{ height: 70 }}>
+              {t("cc")}
+            </Button>
+            <Button onClick={() => handlePayment("cash")} sx={{ height: 70 }}>
+              {" "}
+              {t("cash")}
+            </Button>
+            <Button disabled={total > amountPaid} sx={{ height: 80 }}>
+              {" "}
+              {t("finishDoc")}
+            </Button>
+            <Button
+              disabled={amountPaid == 0}
+              onClick={() => {
+                setCardPayment(0);
+                setCashPayment(0);
+              }}
+            >
+              {" "}
+              {t("refund")}
+            </Button>
+          </Fragment>
         );
       default:
         break;
@@ -249,23 +317,105 @@ export default function SalePage() {
           }}
         >
           <CustomAccordion
-            summary={t("products")}
+            summary={stage === 1 ? t("products") : t("invoice")}
             expanded={expand === "product"}
             onChange={() => handleAcordion("basket", "product")}
           >
-            <AccordionProducts
-              setSelectedProduct={setSelectedProduct}
-              selectedProduct={selectedProduct}
-              products={products}
-              categories={categories}
-            />
+            {stage === 1 ? (
+              <AccordionProducts
+                setSelectedProduct={setSelectedProduct}
+                selectedProduct={selectedProduct}
+                products={products}
+                categories={categories}
+              />
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                  padding: 1,
+                  height: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    flexBasis: "100%",
+                    flexDirection: "column",
+                    display: "flex",
+                    gap: 2,
+                  }}
+                >
+                  <Button>E-Fatura</Button>
+                </Box>
+
+                <Divider />
+
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Typography>{t("subTotal")}:</Typography>
+                    <Typography> {subTotal}</Typography>
+                  </Box>
+
+                  <Divider
+                    light
+                    sx={{ bgcolor: (theme) => theme.palette.secondary.main }}
+                  />
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Typography>{t("total")}:</Typography>
+                    <Typography> {total}</Typography>
+                  </Box>
+                  <Divider
+                    light
+                    sx={{ bgcolor: (theme) => theme.palette.primary.main }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Typography>{t("amountPaid")}:</Typography>
+                    <Typography> {amountPaid}</Typography>
+                  </Box>
+                  <Divider
+                    light
+                    sx={{ bgcolor: (theme) => theme.palette.secondary.main }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Typography>{t("remainderOfMoney")}:</Typography>
+                    <Typography> {payableAmount}</Typography>
+                  </Box>
+                </Box>
+              </Box>
+            )}
           </CustomAccordion>
 
           <CustomAccordion
             expanded={expand === "basket"}
             onChange={() => handleAcordion("product", "basket")}
             summary={
-              <Badge badgeContent={cart.length} color="primary">
+              <Badge badgeContent={itemCount} color="primary">
                 <ShoppingBasketIcon />
               </Badge>
             }
@@ -273,9 +423,8 @@ export default function SalePage() {
           >
             <Box sx={{ flexBasis: "100%", overflowX: "auto" }}>
               {cart.map((x) => (
-                <>
+                <Fragment key={x.id}>
                   <Box
-                    key={x.id}
                     sx={{
                       display: "flex",
                       bgcolor: "customInput",
@@ -325,8 +474,9 @@ export default function SalePage() {
                           color="error"
                           onClick={() => {
                             removeFromCart(x);
-                            if (cart.length - 1 === 0) {
+                            if (itemCount - 1 === 0) {
                               setIsLineCancel(false);
+                              setStage(1);
                             }
                           }}
                           sx={{ height: 35, width: 35 }}
@@ -354,7 +504,7 @@ export default function SalePage() {
                     </Box>
                   </Box>
                   <Divider />
-                </>
+                </Fragment>
               ))}
             </Box>
             <Box
@@ -396,10 +546,12 @@ export default function SalePage() {
           </CustomAccordion>
         </Box>
       </Box>
+      
       <PromotionsModal
         handleClose={() => setShowPromotions(false)}
         open={showPromotions}
       />
+      <ToastContainer />
     </ContainerDiv>
   );
 }
