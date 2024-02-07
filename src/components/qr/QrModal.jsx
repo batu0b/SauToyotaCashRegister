@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { QrCodePlugin } from "./QrCodePlugin";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-//TODO lng
+
 export const QrModal = ({ open, handleClose }) => {
   const [result, setResult] = useState(null);
   const { t } = useTranslation();
@@ -24,10 +24,17 @@ export const QrModal = ({ open, handleClose }) => {
       setResult(null);
     };
     const goToProduct = () => {
-      navigate({
-        pathname: "/products",
-        search: `query=${result}`,
-      });
+      navigate(
+        {
+          pathname: "/products",
+          search: `query=${result}`,
+        },
+        {
+          state: {
+            reset: true,
+          },
+        }
+      );
       resetAndHandleClose();
     };
 
@@ -60,7 +67,8 @@ export const QrModal = ({ open, handleClose }) => {
           display: "flex",
           alignItems: "center",
           [theme.breakpoints.down("md")]: {
-            width: "100%",
+            width: 500,
+            height: 500,
           },
         })}
       >

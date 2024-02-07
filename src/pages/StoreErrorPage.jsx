@@ -1,12 +1,12 @@
-import React from "react";
 import { ContainerDiv } from "../components/ContainerDiv";
 import Lottie from "react-lottie";
 import noConnection from "../assets/NoConnection.json";
-import { Box, Fab, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useServerStatusContex } from "../context/server_status/ServerStatusContex";
 import { Navigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+
 export default function StoreErrorPage() {
   const { t } = useTranslation();
   const { breakpoints } = useTheme();

@@ -1,5 +1,9 @@
 import { ContainerDiv } from "../components/ContainerDiv";
-import { useOutletContext, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useOutletContext,
+  useSearchParams,
+} from "react-router-dom";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import VirtualProductList from "../components/product/VirtualProductList";
@@ -14,6 +18,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { useTranslation } from "react-i18next";
+//TODO edit top sections
 const topSections = [
   "A",
   "B",
@@ -27,21 +32,43 @@ const topSections = [
   "Ş-T",
   "Ü-Z",
 ];
-//TODO custom item for categeries
+const initialFilterState = {
+  filterByAlpahbet: "-",
+  isFavorites: false,
+  query: "",
+  currentCategory: {
+    category: "Hepsi",
+    url: "",
+  },
+};
+//TODO categories lang
 export default function ProductsPage() {
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();
-  const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const [currentCategory, setCurrentCategory] = useState(
+    initialFilterState.currentCategory
+  );
   const [searchParam, setSearchParams] = useSearchParams();
-  const [filterByAlpahbet, setFilterByAlpahbet] = useState("-");
+  const [filterByAlpahbet, setFilterByAlpahbet] = useState(
+    initialFilterState.filterByAlpahbet
+  );
   const [currentData, setCurrentData] = useState(null);
-  const [isLoading, setIsLoading] = useState();
-  const [isFavorites, setIsFavorites] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFavorites, setIsFavorites] = useState(
+    initialFilterState.isFavorites
+  );
   const [isPending, startTransition] = useTransition();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialFilterState.query);
   const { user } = useAuthContext();
-
-  console.log("searchParam", searchParam && searchParam.get("query"));
+  const { state } = useLocation();
+  const resetFilters = () => {
+    setCurrentCategory(initialFilterState.currentCategory);
+    setFilterByAlpahbet(initialFilterState.filterByAlpahbet);
+    setIsFavorites(initialFilterState.isFavorites);
+    setQuery(initialFilterState.query);
+    setSearchParams({ query: searchParam.get("query") });
+    setQuery("");
+  };
 
   const handleAlpahbet = (x) => {
     if (filterByAlpahbet === "-") {
@@ -91,7 +118,6 @@ export default function ProductsPage() {
           showFavorites = false;
         }
       }
-
       return (
         alphabedCondition &&
         categoryCondition &&
@@ -127,9 +153,18 @@ export default function ProductsPage() {
     setSearchParams({ query: "" });
     setQuery("");
   };
+
   useEffect(() => {
-    handleFilter();
-  }, [currentCategory, filterByAlpahbet, searchParam, isFavorites]);
+    if (!state?.reset) {
+      handleFilter();
+    }
+  }, [currentCategory, filterByAlpahbet, searchParam, isFavorites, state]);
+
+  useEffect(() => {
+    if (state?.reset) {
+      resetFilters();
+    }
+  }, [state]);
 
   return (
     <ContainerDiv
@@ -171,6 +206,7 @@ export default function ProductsPage() {
           label={t("filterAlphabetLabel")}
         />
         <TopFilterSelect
+          localSections={[initialFilterState.currentCategory]}
           currentValue={currentCategory}
           list={categories}
           showCustomValue={(x) => x.category}
@@ -178,6 +214,7 @@ export default function ProductsPage() {
           label={t("filterCategoryLabel")}
         />
       </Box>
+
       <Box
         sx={(theme) => ({
           width: "100%",
@@ -221,6 +258,7 @@ export default function ProductsPage() {
           </Box>
         )}
       </Box>
+
       <BottomBar
         handleReset={handleResetSearch}
         handleSearch={handleSearch}

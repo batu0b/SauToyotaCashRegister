@@ -8,6 +8,7 @@ import axios from "axios";
 import { ServerStatusContexProvider } from "./context/server_status/ServerStatusContexProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/auth/AuthContextProvider.jsx";
+import { BasketContexProvider } from "./context/basket/BasketCOntexProvider.jsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 worker.start().then(() =>
@@ -16,7 +17,9 @@ worker.start().then(() =>
       <ThemeContextProvider>
         <AuthContextProvider>
           <ServerStatusContexProvider>
-            <App />
+            <BasketContexProvider>
+              <App />
+            </BasketContexProvider>
           </ServerStatusContexProvider>
         </AuthContextProvider>
       </ThemeContextProvider>

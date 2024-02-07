@@ -2,18 +2,17 @@ import { Badge, Box, Divider, Drawer, Typography } from "@mui/material";
 import { useServerStatusContex } from "../../context/server_status/ServerStatusContex";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "../../context/auth/AuthContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import CampaignIcon from "@mui/icons-material/Campaign";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import { MatchesAppBar } from "./MatchesAppBar";
 import { DrawerList } from "./DrawerList";
 import { QrModal } from "../qr/QrModal";
+import { useBasketContext } from "../../context/basket/BasketContext";
 
 export const AppDrawer = ({ matches }) => {
   const { pathname } = useLocation();
@@ -21,24 +20,26 @@ export const AppDrawer = ({ matches }) => {
   const [showQrModal, setShowQrModal] = useState(false);
   const [open, setOpen] = useState(false);
   const { serverIsAlive } = useServerStatusContex();
-
+  const { itemCount } = useBasketContext();
   const { t } = useTranslation();
   const { user } = useAuthContext();
-  const handleQrModal = () => {
+  const handleQrModal = useCallback(() => {
     setShowQrModal(true);
     handleDrawer();
-  };
-  const handleCloseQrModal = () => {
-    setShowQrModal(false);
-  };
-  const handleDrawer = () => {
-    setOpen((prev) => !prev);
-  };
+  }, []);
 
-  const handleNavigation = (x) => {
+  const handleCloseQrModal = useCallback(() => {
+    setShowQrModal(false);
+  }, []);
+
+  const handleDrawer = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  const handleNavigation = useCallback((x) => {
     navigation(x.pathname);
     handleDrawer();
-  };
+  }, []);
 
   const upperNav = [
     {
@@ -56,7 +57,11 @@ export const AppDrawer = ({ matches }) => {
     {
       pathname: "/sale",
       name: "Sale",
-      ico: <StorefrontIcon />,
+      ico: (
+        <Badge badgeContent={itemCount} color="secondary">
+          <StorefrontIcon />
+        </Badge>
+      ),
       method: handleNavigation,
     },
     {
@@ -65,24 +70,8 @@ export const AppDrawer = ({ matches }) => {
       ico: <QrCodeIcon />,
       method: handleQrModal,
     },
-    {
-      pathname: "/campaigns",
-      name: "Campaigns",
-      ico: <CampaignIcon />,
-      method: handleNavigation,
-    },
   ];
   const downNav = [
-    {
-      pathname: "/basket",
-      name: "Basket",
-      ico: (
-        <Badge badgeContent={8} color="secondary">
-          <ShoppingBasketIcon />
-        </Badge>
-      ),
-      method: handleNavigation,
-    },
     {
       pathname: "/settings",
       name: "Settings",
