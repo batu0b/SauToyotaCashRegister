@@ -12,6 +12,7 @@
     align-items: center;
     background: rgb(255, 249, 249);
     color: rgb(0, 0, 0);
+    border: 1px solid black;
   }
   
   .simple-keyboard.myTheme1 .hg-button:active {

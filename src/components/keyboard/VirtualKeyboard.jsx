@@ -1,17 +1,21 @@
 import { KeyboardReact } from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import "./style.css";
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import ReactDomServer from "react-dom/server";
 import layouts from "./KeyboardLayouts.json";
 import i18n from "../../lang";
-//TODO theme and input modal
-const VirtualKeyboard = forwardRef(
-  ({ setInput, isNumpad = false }, keyboard) => {
-    const [layoutName, setLayoutName] = useState("default");
 
+const VirtualKeyboard = forwardRef(
+  ({ setInput, isNumpad = false, initialValue }, keyboard) => {
+    const [layoutName, setLayoutName] = useState("default");
+    useEffect(() => {
+      if (keyboard.current) {
+        keyboard.current.setInput(initialValue);
+      }
+    }, [keyboard.current]);
     const numpad = {
       default: ["00 {bksp}", "7 8 9", "4 5 6", "1 2 3", "0 .", "{reset}"],
     };
@@ -25,7 +29,6 @@ const VirtualKeyboard = forwardRef(
     };
 
     const onKeyPress = (button) => {
-      console.log("Button pressed", button);
       if (button === "{reset}") {
         setInput("");
         keyboard.current.setInput("");

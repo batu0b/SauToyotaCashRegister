@@ -127,8 +127,19 @@ export default function SalePage() {
             </Button>
             <Button
               onClick={() => {
-                setStage(2);
-                setExpand("product");
+                if (expand !== "basket") {
+                  toast(t("checkBasketPls"), {
+                    autoClose: 1500,
+                    type: "warning",
+                    position: "top-center",
+                    theme: "colored",
+                    pauseOnHover: false,
+                  });
+                  setExpand("basket");
+                } else {
+                  setStage(2);
+                  setExpand("product");
+                }
               }}
               color="primary"
               disabled={itemCount === 0}

@@ -1,7 +1,6 @@
 import {
   Box,
   Divider,
-  TextField,
   Pagination,
   Typography,
   CardMedia,
@@ -14,6 +13,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { customLocaleLowerCase } from "../../helpers";
 import { useTranslation } from "react-i18next";
+import { KeyboardModal } from "../keyboard/KeyboardModal";
 
 const initialFilterState = {
   query: "",
@@ -204,13 +204,14 @@ export const AccordionProducts = ({
           <IconButton onClick={handleResetSearch}>
             <ReplayIcon size="large" />
           </IconButton>
-          <TextField
+          <KeyboardModal
             color="secondary"
             label={t("searchBarLabel")}
             sx={{ bgcolor: "customInput", borderRadius: 1 }}
             fullWidth
             size="small"
             onChange={(e) => setSearchText(e.target.value)}
+            setInpit={setSearchText}
             value={searchText}
           />
           <IconButton type="submit">

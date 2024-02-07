@@ -79,6 +79,7 @@
     "quantity": "Adet",
     "discount": "İndirim",
     "changeMoney": "Para Üstü",
-    "customerEmail": "Müşteri E-posta Adresi"
+    "customerEmail": "Müşteri E-posta Adresi",
+    "checkBasketPls": "Lütfen Sepetinizi Kontrol Ettikten Sonra Ödeme Ekranına Geçiniz"
   }
 }

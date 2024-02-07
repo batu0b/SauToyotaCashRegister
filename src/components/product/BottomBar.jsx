@@ -1,10 +1,11 @@
-import { Fab, TextField } from "@mui/material";
+import { Fab } from "@mui/material";
 import { Box } from "@mui/system";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useTranslation } from "react-i18next";
+import { KeyboardModal } from "../keyboard/KeyboardModal";
 export const BottomBar = ({ handleSearch, setQuery, query, handleReset }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -47,13 +48,13 @@ export const BottomBar = ({ handleSearch, setQuery, query, handleReset }) => {
           >
             <ReplayIcon />
           </Fab>
-          <TextField
+          <KeyboardModal
             fullWidth
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             size="small"
             label={t("searchBarLabel")}
-            aria-readonly={true}
+            setInpit={setQuery}
           />
           <Fab
             type="submit"

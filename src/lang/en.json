@@ -79,6 +79,7 @@
     "quantity": "Quantity",
     "discount": "Discount",
     "changeMoney": "Change Money",
-    "customerEmail": "Customer Email Address"
+    "customerEmail": "Customer Email Address",
+    "checkBasketPls": "Please Go To The Payment Screen After Checking Your Cart"
   }
 }

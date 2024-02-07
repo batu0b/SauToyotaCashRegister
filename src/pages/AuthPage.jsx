@@ -13,11 +13,11 @@ import { loginService } from "../services";
 import { useFormik } from "formik";
 import { LoginSchema } from "../validations";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { KeyboardModal } from "../components/keyboard/KeyboardModal";
 
 export default function AuthPage() {
   const { t } = useTranslation();
   const { setIsAuth, setIsLoading, setUser, isLoading } = useAuthContext();
-
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -72,7 +72,7 @@ export default function AuthPage() {
           onSubmit={formik.handleSubmit}
         >
           <Box flexDirection={"column"} display={"flex"} gap={5} width={"100%"}>
-            <TextField
+            <KeyboardModal
               onKeyDown={(evt) =>
                 ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
               }
@@ -90,8 +90,10 @@ export default function AuthPage() {
               label={t("UserName")}
               type="number"
               className="input"
+              isNumpad={true}
+              setInpit={(val) => formik.setFieldValue("userCode", parseInt(val))}
             />
-            <TextField
+            <KeyboardModal
               error={
                 formik.errors.password && formik.touched.password ? true : false
               }
@@ -106,6 +108,7 @@ export default function AuthPage() {
               type="password"
               label={t("Password")}
               border
+              setInpit={(val) => formik.setFieldValue("password", val)}
             />
           </Box>
           <Button
