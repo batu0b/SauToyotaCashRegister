@@ -72,6 +72,13 @@
     "finishDoc": "Belgeyi Bitir",
     "refund": "İade",
     "amountPaid": "Ödenen Tutar",
-    "remainderOfMoney": "Kalan Tutar"
+    "remainderOfMoney": "Kalan Tutar",
+    "date": "Tarih",
+    "hour": "Saat",
+    "cashier": "Kasiyer",
+    "quantity": "Adet",
+    "discount": "İndirim",
+    "changeMoney": "Para Üstü",
+    "customerEmail": "Müşteri E-posta Adresi"
   }
 }

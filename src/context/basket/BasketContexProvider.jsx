@@ -13,6 +13,7 @@ export const BasketContexProvider = ({ children }) => {
   const [cardPayment, setCardPayment] = useState(0);
   const [promotions, setPromotions] = useState(null);
   const [payableAmount, setPayableAmount] = useState(0);
+  const [customerEmail, setCustomerEmail] = useState("");
 
   const { response, isLoading, error } = useAxios({
     url: "/promotions",
@@ -158,6 +159,8 @@ export const BasketContexProvider = ({ children }) => {
         setCashPayment,
         setPayableAmount,
         payableAmount,
+        setCustomerEmail,
+        customerEmail,
       }}
     >
       {children}

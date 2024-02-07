@@ -1,5 +1,4 @@
 import { Accordion, AccordionSummary, Box } from "@mui/material";
-import React from "react";
 
 export const CustomAccordion = ({
   expanded,

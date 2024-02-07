@@ -1,1 +1,1 @@
-export { LoginSchema } from "./schematics";
+export { LoginSchema, CustomerEmailSchema } from "./schematics";

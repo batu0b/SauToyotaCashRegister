@@ -2,14 +2,12 @@ import { Badge, Box, Divider, Drawer, Typography } from "@mui/material";
 import { useServerStatusContex } from "../../context/server_status/ServerStatusContex";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "../../context/auth/AuthContext";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import CampaignIcon from "@mui/icons-material/Campaign";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import { MatchesAppBar } from "./MatchesAppBar";
 import { DrawerList } from "./DrawerList";
@@ -71,12 +69,6 @@ export const AppDrawer = ({ matches }) => {
       name: "Qr",
       ico: <QrCodeIcon />,
       method: handleQrModal,
-    },
-    {
-      pathname: "/campaigns",
-      name: "Campaigns",
-      ico: <CampaignIcon />,
-      method: handleNavigation,
     },
   ];
   const downNav = [

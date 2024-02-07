@@ -27,6 +27,8 @@ import { useTranslation } from "react-i18next";
 //
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { EMailModal } from "../components/sale/EMailModal";
+import { InvoiceModal } from "../components/sale/InvoiceModal";
 
 export default function SalePage() {
   const {
@@ -45,6 +47,7 @@ export default function SalePage() {
     setCardPayment,
     setCashPayment,
     payableAmount,
+    customerEmail,
   } = useBasketContext();
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();
@@ -54,7 +57,8 @@ export default function SalePage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLineCancel, setIsLineCancel] = useState(false);
   const [showPromotions, setShowPromotions] = useState(false);
-
+  const [showEMailModal, setShowEmailModal] = useState(false);
+  const [showInvoice, setShowInvoice] = useState(false);
   const keyboard = useRef(null);
   const theme = useTheme();
   const match = useMediaQuery(theme.breakpoints.down("md"));
@@ -160,7 +164,11 @@ export default function SalePage() {
               {" "}
               {t("cash")}
             </Button>
-            <Button disabled={total > amountPaid} sx={{ height: 80 }}>
+            <Button
+              onClick={() => setShowInvoice(true)}
+              disabled={total - amountPaid > 0}
+              sx={{ height: 80 }}
+            >
               {" "}
               {t("finishDoc")}
             </Button>
@@ -174,6 +182,12 @@ export default function SalePage() {
               {" "}
               {t("refund")}
             </Button>
+            {showInvoice ? (
+              <InvoiceModal
+                open={showInvoice}
+                handleClose={() => setShowInvoice(false)}
+              />
+            ) : null}
           </Fragment>
         );
       default:
@@ -346,7 +360,16 @@ export default function SalePage() {
                     gap: 2,
                   }}
                 >
-                  <Button>E-Fatura</Button>
+                  <Button onClick={() => setShowEmailModal(true)}>
+                    E-{t("invoce")}
+                  </Button>
+                  {customerEmail && <Typography>{customerEmail}</Typography>}
+                  {showEMailModal ? (
+                    <EMailModal
+                      open={showEMailModal}
+                      handleClose={() => setShowEmailModal(false)}
+                    />
+                  ) : null}
                 </Box>
 
                 <Divider />
@@ -546,7 +569,7 @@ export default function SalePage() {
           </CustomAccordion>
         </Box>
       </Box>
-      
+
       <PromotionsModal
         handleClose={() => setShowPromotions(false)}
         open={showPromotions}

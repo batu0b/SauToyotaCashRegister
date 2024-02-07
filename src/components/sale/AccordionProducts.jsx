@@ -1,9 +1,7 @@
 import {
   Box,
   Divider,
-  ListItemButton,
   TextField,
-  List,
   Pagination,
   Typography,
   CardMedia,

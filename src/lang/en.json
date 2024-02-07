@@ -72,6 +72,13 @@
     "finishDoc": "Finish Document",
     "refund": "Refund",
     "amountPaid": "Amount Paid",
-    "remainderOfMoney": "Remaining Amount"
+    "remainderOfMoney": "Remaining Amount",
+    "date": "Date",
+    "hour": "Time",
+    "cashier": "Cashier",
+    "quantity": "Quantity",
+    "discount": "Discount",
+    "changeMoney": "Change Money",
+    "customerEmail": "Customer Email Address"
   }
 }

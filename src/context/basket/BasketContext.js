@@ -11,6 +11,7 @@ export const BasketContext = createContext({
   cardPayment: 0,
   cashPayment: 0,
   payableAmount: 0,
+  customerEmail: "",
   addToCart: () => {},
   removeFromCart: () => {},
   deleteCart: () => {},
@@ -20,6 +21,7 @@ export const BasketContext = createContext({
   setCardPayment: () => {},
   setCashPayment: () => {},
   setPayableAmount: () => {},
+  setCustomerEmail: () => {},
 });
 
 export const useBasketContext = () => useContext(BasketContext);
