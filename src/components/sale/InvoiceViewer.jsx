@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -7,15 +7,22 @@ import { pdfjs } from "react-pdf";
 import PrintIcon from "@mui/icons-material/Print";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import printJS from "print-js";
+import useDeviceDetection from "../../hooks/useDeviceDetection";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
+import printerTest from "../../assets/printerTest.pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
 ).toString();
 
-export const InvoiceViewer = ({ url }) => {
+export const InvoiceViewer = ({ url, handleFinish, isTest = false }) => {
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
+  const { isMobile } = useDeviceDetection();
+
+  console.log(printerTest);
   const ref = useRef(null);
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -31,8 +38,12 @@ export const InvoiceViewer = ({ url }) => {
     }
   };
   const print = () => {
-    var myWindow = window.open(url, "", "width=500,height=500");
-    myWindow.print();
+    if (!isMobile) {
+      printJS(url || printerTest);
+    } else {
+      const newWindow = window.open(url || printerTest, "_blank");
+      newWindow.print();
+    }
   };
   return (
     <Box
@@ -49,7 +60,7 @@ export const InvoiceViewer = ({ url }) => {
       <Document
         loading={null}
         onLoadSuccess={onDocumentLoadSuccess}
-        file={url}
+        file={isTest ? printerTest : url}
         renderMode="canvas"
       >
         {ref.current ? (
@@ -85,7 +96,13 @@ export const InvoiceViewer = ({ url }) => {
         sx={{ position: "absolute", bottom: -20, right: -20 }}
         onClick={print}
       >
-        <PrintIcon />
+        <PrintIcon fontSize="large" />
+      </Fab>
+      <Fab
+        onClick={handleFinish}
+        sx={{ position: "absolute", bottom: -20, left: -20 }}
+      >
+        <CheckCircleOutlineIcon fontSize="large" />
       </Fab>
     </Box>
   );

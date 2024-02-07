@@ -4,9 +4,11 @@ import { VirtualKeyboard } from "../keyboard/VirtualKeyboard";
 import { useBasketContext } from "../../context/basket/BasketContext";
 import { useFormik } from "formik";
 import { CustomerEmailSchema } from "../../validations";
+import { useTranslation } from "react-i18next";
 
 export const EMailModal = ({ open, handleClose }) => {
   const { setCustomerEmail } = useBasketContext();
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
   const formik = useFormik({
@@ -41,7 +43,7 @@ export const EMailModal = ({ open, handleClose }) => {
           />
           <VirtualKeyboard setInput={customChange} ref={keyboard} />
           <Button type="submit" size="large" sx={{ mt: 2 }} fullWidth>
-            kaydet
+            {t("saveChanges")}
           </Button>
         </form>
       </Box>

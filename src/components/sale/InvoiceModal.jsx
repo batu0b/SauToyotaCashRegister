@@ -29,7 +29,6 @@ Font.register({
   ],
 });
 
-
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#eee",
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const InvoiceModal = ({ open, handleClose }) => {
+export const InvoiceModal = ({ open, handleClose, handleFinish }) => {
   const { cart, subTotal, total, payableAmount, customerEmail, amountPaid } =
     useBasketContext();
   const { user } = useAuthContext();
@@ -139,7 +138,9 @@ export const InvoiceModal = ({ open, handleClose }) => {
       <Box sx={{ height: "600px", width: "450px" }} className="modal_box">
         <BlobProvider document={doc}>
           {({ blob, url, loading, error }) => {
-            return loading ? null : error ? null : <InvoiceViewer url={url} />;
+            return loading ? null : error ? null : (
+              <InvoiceViewer handleFinish={handleFinish} url={url} />
+            );
           }}
         </BlobProvider>
       </Box>

@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export const TopFilterSelect = ({
   currentValue,
@@ -9,6 +10,7 @@ export const TopFilterSelect = ({
   localSections,
   sx,
 }) => {
+  const { t } = useTranslation();
   return (
     <FormControl sx={{ sx }} fullWidth>
       <InputLabel id={label + "-label"}>{label}</InputLabel>
@@ -30,14 +32,14 @@ export const TopFilterSelect = ({
           localSections?.map((x) => {
             return (
               <MenuItem key={x} value={x} onClick={() => handleSelect(x)}>
-                {showCustomValue ? showCustomValue(x) : x}
+                {t(showCustomValue ? showCustomValue(x) : x)}
               </MenuItem>
             );
           })}
         {list.map((x) => {
           return (
             <MenuItem key={x} value={x} onClick={() => handleSelect(x)}>
-              {showCustomValue ? showCustomValue(x) : x}
+              {t(showCustomValue ? showCustomValue(x) : x)}
             </MenuItem>
           );
         })}

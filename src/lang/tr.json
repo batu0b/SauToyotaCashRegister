@@ -80,6 +80,8 @@
     "discount": "İndirim",
     "changeMoney": "Para Üstü",
     "customerEmail": "Müşteri E-posta Adresi",
-    "checkBasketPls": "Lütfen Sepetinizi Kontrol Ettikten Sonra Ödeme Ekranına Geçiniz"
+    "checkBasketPls": "Lütfen Sepetinizi Kontrol Ettikten Sonra Ödeme Ekranına Geçiniz",
+    "saveChanges": "Değişiklikleri Kaydet",
+    "all": "Hepsi"
   }
 }

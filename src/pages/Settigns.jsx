@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   IconButton,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
@@ -16,11 +17,14 @@ import PrintIcon from "@mui/icons-material/Print";
 import { useServerStatusContex } from "../context/server_status/ServerStatusContex";
 import CableIcon from "@mui/icons-material/Cable";
 import { storeConnectionPostService } from "../services";
+import { InvoiceViewer } from "../components/sale/InvoiceViewer";
+import { useState } from "react";
 
 export default function Settigns() {
   const { t } = useTranslation();
   const { logOut } = useAuthContext();
   const { serverIsAlive, setServerStatus } = useServerStatusContex();
+  const [tester, setShowTester] = useState(false);
 
   const papperStyle = (theme) => ({
     width: "100%",
@@ -30,7 +34,6 @@ export default function Settigns() {
     padding: 2,
   });
 
-  //TODO add test printer
   return (
     <ContainerDiv sx={{ justifyContent: "flex-start", gap: 3 }}>
       <Paper sx={papperStyle}>
@@ -51,6 +54,7 @@ export default function Settigns() {
         <SettingsItem title={t("printTest")}>
           <Box>
             <IconButton
+              onClick={() => setShowTester(true)}
               sx={{
                 marginLeft: 4,
               }}
@@ -102,6 +106,9 @@ export default function Settigns() {
           </Box>
         </SettingsItem>
       </Paper>
+      {tester ? (
+        <PrintTester handleClose={() => setShowTester(false)} open={tester} />
+      ) : null}
     </ContainerDiv>
   );
 }
@@ -125,5 +132,15 @@ const SettingsItem = ({ children, title, boxSx, titleSx }) => {
       </Divider>
       {children}
     </Box>
+  );
+};
+
+const PrintTester = ({ handleClose, open }) => {
+  return (
+    <Modal open={open} onClose={handleClose}>
+      <Box sx={{ height: 600, width: 500 }} className="modal_box">
+        <InvoiceViewer handleFinish={handleClose} isTest={true} />
+      </Box>
+    </Modal>
   );
 };

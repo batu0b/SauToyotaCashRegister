@@ -48,6 +48,7 @@ export default function SalePage() {
     setCashPayment,
     payableAmount,
     customerEmail,
+    setCustomerEmail,
   } = useBasketContext();
   const { t } = useTranslation();
   const { categories, products } = useOutletContext();
@@ -195,6 +196,12 @@ export default function SalePage() {
             </Button>
             {showInvoice ? (
               <InvoiceModal
+                handleFinish={() => {
+                  setShowInvoice(false);
+                  setStage(1);
+                  deleteCart();
+                  setCustomerEmail(null);
+                }}
                 open={showInvoice}
                 handleClose={() => setShowInvoice(false)}
               />
@@ -286,6 +293,7 @@ export default function SalePage() {
                     onClick={() => {
                       deleteCart();
                       setStage(1);
+                      setCustomerEmail(null);
                     }}
                     color="error"
                   >

@@ -18,32 +18,50 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { useTranslation } from "react-i18next";
-//TODO edit top sections
-const topSections = [
-  "A",
-  "B",
-  "C-D",
-  "E-F",
-  "G-I",
-  "K",
-  "L-N",
-  "P",
-  "R-S",
-  "Ş-T",
-  "Ü-Z",
-];
+
+const topSections = {
+  en: [
+    "A",
+    "B",
+    "C-D",
+    "E-F",
+    "G-J",
+    "K-L",
+    "M-N",
+    "O-P",
+    "Q-R",
+    "S-T",
+    "U-V",
+    "W-Z",
+  ],
+  tr: [
+    "A",
+    "B",
+    "C-D",
+    "E-F",
+    "G-J",
+    "K-L",
+    "M-N",
+    "O-P",
+    "R-T",
+    "Ş-T",
+    "U-V",
+    "Y-Z",
+  ],
+};
+
 const initialFilterState = {
   filterByAlpahbet: "-",
   isFavorites: false,
   query: "",
   currentCategory: {
-    category: "Hepsi",
+    category: "all",
     url: "",
   },
 };
-//TODO categories lang
+
 export default function ProductsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { categories, products } = useOutletContext();
   const [currentCategory, setCurrentCategory] = useState(
     initialFilterState.currentCategory
@@ -201,7 +219,7 @@ export default function ProductsPage() {
         </Button>
         <TopFilterSelect
           currentValue={filterByAlpahbet}
-          list={["-", ...topSections]}
+          list={["-", ...topSections[i18n.language]]}
           handleSelect={hadnleSetAlphabetFilter}
           label={t("filterAlphabetLabel")}
         />

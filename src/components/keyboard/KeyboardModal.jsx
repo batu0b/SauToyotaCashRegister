@@ -1,10 +1,12 @@
-import { Box, Modal, TextField } from "@mui/material";
+import { Box, Modal, TextField, Button } from "@mui/material";
 import useDeviceDetection from "../../hooks/useDeviceDetection";
 import { useRef, useState } from "react";
 import { VirtualKeyboard } from "./VirtualKeyboard";
+import { useTranslation } from "react-i18next";
 
 export const KeyboardModal = ({ setInpit, onChange, ...props }) => {
   const { isMobile } = useDeviceDetection();
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const keyboard = useRef(null);
   const handleClick = () => {
@@ -23,7 +25,7 @@ export const KeyboardModal = ({ setInpit, onChange, ...props }) => {
 
       {showModal ? (
         <Modal open={showModal} onClose={() => setShowModal(false)}>
-          <Box sx={{ width: "80%" }} className="modal_box">
+          <Box sx={{ width: "90%" }} className="modal_box">
             <TextField
               fullWidth
               placeholder={props.label}
@@ -40,6 +42,14 @@ export const KeyboardModal = ({ setInpit, onChange, ...props }) => {
               setInput={setInpit}
               ref={keyboard}
             />
+            <Button
+              sx={{ mt: 2 }}
+              onClick={() => setShowModal(false)}
+              fullWidth
+              size="large"
+            >
+              {t("saveChanges")}
+            </Button>
           </Box>
         </Modal>
       ) : null}

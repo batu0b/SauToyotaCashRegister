@@ -18,7 +18,7 @@ import { KeyboardModal } from "../keyboard/KeyboardModal";
 const initialFilterState = {
   query: "",
   currentCategory: {
-    category: "Hepsi",
+    category: "all",
     url: "",
   },
 };

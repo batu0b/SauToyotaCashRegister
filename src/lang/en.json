@@ -80,6 +80,8 @@
     "discount": "Discount",
     "changeMoney": "Change Money",
     "customerEmail": "Customer Email Address",
-    "checkBasketPls": "Please Go To The Payment Screen After Checking Your Cart"
+    "checkBasketPls": "Please Go To The Payment Screen After Checking Your Cart",
+    "saveChanges": "Save Changes",
+    "all": "All"
   }
 }
