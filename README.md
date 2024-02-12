@@ -10,6 +10,7 @@ Mobile and Web Compatible Cash Register Application for Stores
 - 100% Compatible For Tablet And Computer
 - UI Blocking
 - Multi-Language Support
+- Shows The Cashier The Charts About The Store
 - Credit Card And Cash Payment Method
 - Virtual Keyboard On Mobile Devices
 - Campaigns We Can Use In The Cart
@@ -21,7 +22,7 @@ Mobile and Web Compatible Cash Register Application for Stores
   
 ## Used Technologies
 
-**Client:** React, Material UI, i18next, react-virtualized, html5-qrcode, formik, yup, axios, print-js, react-pdf, react-router-dom 
+**Client:** React, Material UI, i18next, react-virtualized, html5-qrcode, formik, yup, axios, print-js, react-pdf, react-router-dom, recharts
 
 **Mock service:** msw (Mock Service Worker)
 
