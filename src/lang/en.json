@@ -82,6 +82,8 @@
     "customerEmail": "Customer Email Address",
     "checkBasketPls": "Please Go To The Payment Screen After Checking Your Cart",
     "saveChanges": "Save Changes",
-    "all": "All"
+    "all": "All",
+    "Remove From Favorites": "Remove From Favorites",
+    "Add To Favorites": "Add To Favorites"
   }
 }

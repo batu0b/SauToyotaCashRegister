@@ -10,8 +10,8 @@
     "printTest": "Yazıcı Testi",
     "dscStore": "Mağazayla Bağlantıyı Kesin",
     "connectStore": "Mağaza ile Bağlantı Kurun",
-    "StoreIsOnline": "Mağza Çevrimiçi",
-    "StoreIsOffline": "Mağza Çevrimdışı",
+    "StoreIsOnline": "Mağaza Çevrimiçi",
+    "StoreIsOffline": "Mağaza Çevrimdışı",
     "Products": "Ürünler",
     "Campaigns": "Kampanyalar",
     "Sale": "Satış",
@@ -82,6 +82,8 @@
     "customerEmail": "Müşteri E-posta Adresi",
     "checkBasketPls": "Lütfen Sepetinizi Kontrol Ettikten Sonra Ödeme Ekranına Geçiniz",
     "saveChanges": "Değişiklikleri Kaydet",
-    "all": "Hepsi"
+    "all": "Hepsi",
+    "Remove From Favorites": "Favorilerden Kaldır",
+    "Add To Favorites": "Favorilere Ekle"
   }
 }

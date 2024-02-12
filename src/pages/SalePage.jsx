@@ -201,6 +201,7 @@ export default function SalePage() {
                   setStage(1);
                   deleteCart();
                   setCustomerEmail(null);
+                  setCurrentPromotion(null);
                 }}
                 open={showInvoice}
                 handleClose={() => setShowInvoice(false)}
@@ -294,6 +295,7 @@ export default function SalePage() {
                       deleteCart();
                       setStage(1);
                       setCustomerEmail(null);
+                      setCurrentPromotion(null);
                     }}
                     color="error"
                   >

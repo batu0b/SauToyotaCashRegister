@@ -93,7 +93,7 @@ export const ProductCard = ({ product, style }) => {
         }}
       >
         <MenuItem onClick={handleFav}>
-          {isThisFav ? "Remove From Favorites" : "Add To Favorites"}
+          {isThisFav ? t("Remove From Favorites") : t("Add To Favorites")}
         </MenuItem>
       </Menu>
       <CardContent
