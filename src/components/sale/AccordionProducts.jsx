@@ -211,7 +211,7 @@ export const AccordionProducts = ({
             fullWidth
             size="small"
             onChange={(e) => setSearchText(e.target.value)}
-            setInpit={setSearchText}
+            setInput={setSearchText}
             value={searchText}
           />
           <IconButton type="submit">

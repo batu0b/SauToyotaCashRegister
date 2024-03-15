@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { VirtualKeyboard } from "./VirtualKeyboard";
 import { useTranslation } from "react-i18next";
 
-export const KeyboardModal = ({ setInpit, onChange, ...props }) => {
+export const KeyboardModal = ({ setInput, onChange, ...props }) => {
   const { isMobile } = useDeviceDetection();
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
@@ -39,7 +39,7 @@ export const KeyboardModal = ({ setInpit, onChange, ...props }) => {
             <VirtualKeyboard
               isNumpad={props.isNumpad}
               initialValue={props.value}
-              setInput={setInpit}
+              setInput={setInput}
               ref={keyboard}
             />
             <Button

@@ -91,7 +91,9 @@ export default function AuthPage() {
               type="number"
               className="input"
               isNumpad={true}
-              setInpit={(val) => formik.setFieldValue("userCode", parseInt(val))}
+              setInput={(val) =>
+                formik.setFieldValue("userCode", parseInt(val))
+              }
             />
             <KeyboardModal
               error={
@@ -108,7 +110,7 @@ export default function AuthPage() {
               type="password"
               label={t("Password")}
               border
-              setInpit={(val) => formik.setFieldValue("password", val)}
+              setInput={(val) => formik.setFieldValue("password", val)}
             />
           </Box>
           <Button

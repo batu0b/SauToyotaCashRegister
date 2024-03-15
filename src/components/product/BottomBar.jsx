@@ -54,7 +54,8 @@ export const BottomBar = ({ handleSearch, setQuery, query, handleReset }) => {
             onChange={(e) => setQuery(e.target.value)}
             size="small"
             label={t("searchBarLabel")}
-            setInpit={setQuery}
+            setInput={setQuery}
+         
           />
           <Fab
             type="submit"
